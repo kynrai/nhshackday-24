@@ -18,7 +18,7 @@ type Server struct {
 func NewServer(conf Config) (*Server, error) {
 	return &Server{
 		r:       chi.NewRouter(),
-		tw:      NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom),
+		tw:      NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom, conf.TwilioTo),
 		ian:     NewIanClient(),
 		clients: make(map[string]*websocket.Conn),
 	}, nil

@@ -14,6 +14,7 @@ type Config struct {
 	TwilioSID      string
 	TwilioAuth     string
 	TwilioFrom     string
+	TwilioTo       string
 }
 
 func NewConfig() Config {
@@ -29,6 +30,7 @@ func NewConfig() Config {
 		TwilioSID:  getEnvDefault("TWILIO_SID", ""),
 		TwilioAuth: getEnvDefault("TWILIO_AUTH", ""),
 		TwilioFrom: getEnvDefault("TWILIO_FROM", ""),
+		TwilioTo:   getEnvDefault("TWILIO_TO", ""),
 	}
 }
 

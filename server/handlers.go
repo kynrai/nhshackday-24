@@ -28,7 +28,7 @@ func (s *Server) handleSubmit(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleSendSMS(w http.ResponseWriter, r *http.Request) {
 	// send sms
-	resp, err := s.tw.SendSMS("+447927303651", "Twilio", "Hello, World!")
+	resp, err := s.tw.SendSMS(s.tw.to, "Twilio", "Hello, World!")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
