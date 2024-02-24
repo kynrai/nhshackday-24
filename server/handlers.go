@@ -7,6 +7,7 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/kynrai/nhshackday-24/model"
+	"github.com/kynrai/nhshackday-24/ui"
 )
 
 func (s *Server) handlePing(w http.ResponseWriter, r *http.Request) {
@@ -88,4 +89,9 @@ func (s *Server) handleDummy(w http.ResponseWriter, r *http.Request) {
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
 	enc.Encode(data)
+}
+
+func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	ui.Index().Render(r.Context(), w)
 }
