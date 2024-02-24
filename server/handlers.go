@@ -3,6 +3,7 @@ package server
 import (
 	_ "embed"
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -20,12 +21,29 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
+func (s *Server) handleSendWS(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	addr := r.FormValue("addr")
+	if addr == "" {
+		http.Error(w, "addr query parameter is required", http.StatusBadRequest)
+		return
+	}
+	conn, ok := s.clients[addr]
+	if !ok {
+		http.Error(w, "No client with that address", http.StatusBadRequest)
+		return
+	}
+	conn.WriteMessage(websocket.TextMessage, []byte("Hello, World!"))
+}
+
 func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
 	connection, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
 		return
 	}
+	log.Println("Client connected:", r.RemoteAddr)
+	s.clients[r.RemoteAddr] = connection
 
 	for {
 		mt, message, err := connection.ReadMessage()
@@ -35,6 +53,7 @@ func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
 		connection.WriteMessage(websocket.TextMessage, message)
 	}
 	connection.Close()
+	delete(s.clients, r.RemoteAddr)
 }
 
 func (s *Server) handleSubmit(w http.ResponseWriter, r *http.Request) {

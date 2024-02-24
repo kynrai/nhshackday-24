@@ -11,7 +11,6 @@ import (
 var assets embed.FS
 
 func (s *Server) Routes() {
-
 	contentAssets, err := fs.Sub(fs.FS(assets), "assets")
 	if err != nil {
 		log.Fatal(err)
