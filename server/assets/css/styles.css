@@ -604,8 +604,12 @@ video {
   width: 16.666667%;
 }
 
-.w-5\/6{
-  width: 83.333333%;
+.w-\[15\%\]{
+  width: 15%;
+}
+
+.w-\[85\%\]{
+  width: 85%;
 }
 
 .w-fit{
@@ -754,6 +758,10 @@ video {
   padding-bottom: 1rem;
 }
 
+.pr-10{
+  padding-right: 2.5rem;
+}
+
 .align-top{
   vertical-align: top;
 }
@@ -761,6 +769,11 @@ video {
 .text-2xl{
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-lg{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .text-sm{
