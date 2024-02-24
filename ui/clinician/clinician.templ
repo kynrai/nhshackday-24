@@ -1,0 +1,84 @@
+package pages
+
+"github.com/kynrai/nhshackday-24/model"
+
+templ SubmissionsPage(data *model.Data) {
+	<div class="flex flex-col gap-2 px-4">
+		<div class="flex flex-col gap-y-4">
+			<table class="table-fixed border-collapse w-full mt-1">
+				@SubmittedFormSectionTitle("Full Blood Count")
+				@SubmittedFormRow("Test Name", data.Details.DateTime.Format("02 Jan 06"))
+				@SubmittedFormRow("Consultation Time", data.Details.DateTime.Format("15:04"))
+				@SubmittedFormRow("Consultation Type", data.Details.Type)
+				@SubmittedFormRow("Speciality", data.Details.Specialty)
+				@SubmittedFormRow("Senior Responsible Clinician", data.Details.Clinician)
+			</table>
+			<table class="table-fixed border-collapse w-full mt-4">
+				@SubmittedFormSectionTitle("Outcomes")
+				@SubmittedFormRow("Cancer Pathway", data.CancerPathway)
+				@SubmittedFormRow("Consultation Outcome", data.Outcome.Answer)
+				@SubmittedFormRow("Next Steps", data.Outcome.AnswerDetails)
+			</table>
+			<table class="table-fixed border-collapse w-full mt-4">
+				@SubmittedFormSectionTitle("Follow Up")
+				if data.FollowUpRequired {
+					@SubmittedFormRow("Follow Up Required", "Yes")
+					@SubmittedFormRow("Pathway", data.FollowUp.Pathway)
+					@SubmittedFormRow("To be seen under the same senior responsible clinician?", data.FollowUp.SameClinician)
+					@SubmittedFormRow("See in this clinic?", data.FollowUp.SameClinic)
+					@SubmittedFormRow("See in?", data.FollowUp.SeeIn)
+					@SubmittedFormRow("In which hospital?", data.FollowUp.Hospital)
+					@SubmittedFormRow("Appointment Directive / Priority", data.FollowUp.AppointmentPriority)
+					@SubmittedFormRow("Clinical Condition", data.FollowUp.ClinicalCondition)
+					@SubmittedFormRow("Patient's preferred consultation method", data.FollowUp.PreferredConsultationMethod)
+					<tr class="align-top text-lg">
+						<td class="p-2 font-medium">Tests required before follow up appointment</td>
+						<td class="p-2">
+							if len(data.FollowUp.Tests) == 0 {
+								-
+							} else {
+								for i, test := range data.FollowUp.Tests {
+									Tests required: { test.TestsRequired }
+									<br/>
+									Undertaken by: { test.TestsUndertakenBy }
+									<br/>
+									Tests required by: { test.TestsRequiredBy }
+									<br/>
+									if i < len(data.FollowUp.Tests)-1 {
+										<br/>
+									}
+								}
+							}
+						</td>
+					</tr>
+				} else {
+					@SubmittedFormRow("Follow Up Required", "No")
+				}
+			</table>
+			<table class="table-fixed border-collapse w-full mt-4">
+				@SubmittedFormSectionTitle("Other")
+				@SubmittedFormRow("Other information", data.OtherInformation)
+			</table>
+		</div>
+	</div>
+}
+
+templ SubmittedFormSectionTitle(title string) {
+	<tr class="p-2 font-semibold bg-dhcw-blue">
+		<td class="p-2 w-1/3 text-xl text-white">{ title }</td>
+		<td class="p-2"></td>
+	</tr>
+}
+
+templ SubmittedFormRow(q,a string) {
+	<tr class="align-top text-lg border-b border-zinc-200 last:border-0">
+		<td class="p-2  font-medium">{ q }</td>
+		<td class="p-2 ">
+			if a == "" {
+				-
+			} else {
+				{ a }
+			}
+		</td>
+	</tr>
+}

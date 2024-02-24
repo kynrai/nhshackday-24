@@ -73,6 +73,13 @@ func (s *Server) handleDummy(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
+	data, err := s.ian.Read()
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	w.Header().Set("Content-Type", "text/html")
 	ui.Index().Render(r.Context(), w)
 }
