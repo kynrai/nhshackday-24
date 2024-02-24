@@ -1,0 +1,124 @@
+package clinician
+
+import (
+	"github.com/kynrai/nhshackday-24/model"
+	"fmt"
+)
+
+templ ClinicianView(tabType string, data model.Data) {
+	<div id="clinician" class="flex h-screen">
+		<div class="w-1/6 h-screen border-r border-gray-400"></div>
+		<div id="tab" class="flex flex-col w-5/6">
+			<nav class="h-10 w-full border-b border-gray-400">
+				<ul class="ml-10 h-10 flex text-gray-500 cursor-pointer">
+					<li
+						hx-get={ "/hx/nav/" + "prescription" }
+						hx-target="#clinician"
+						hx-swap="morph:outerHTML"
+						class={ "px-4 py-2 border border-gray-400 bg-gray-200 rounded-tl", templ.KV("border-b-white bg-white",tabType=="prescription"), templ.KV("hover:bg-blue-100",tabType!="prescription") }
+					>
+						Prescriptions
+					</li>
+					<li
+						hx-get={ "/hx/nav/" + "lab" }
+						hx-target="#clinician"
+						hx-swap="morph:outerHTML"
+						class={ "px-4 py-2 border-y border-gray-400 bg-gray-200",templ.KV("border-b-white bg-white",tabType=="lab"),templ.KV("hover:bg-blue-100",tabType!="lab") }
+					>
+						Lab Results
+					</li>
+					<li
+						hx-get={ "/hx/nav/" + "appointment" }
+						hx-target="#clinician"
+						hx-swap="morph:outerHTML"
+						class={ "px-4 py-2 border border-gray-400 bg-gray-200 rounded-tr",templ.KV("border-b-white bg-white",tabType=="appointment"),templ.KV("hover:bg-blue-100",tabType!="appointment") }
+					>
+						Appointments
+					</li>
+				</ul>
+			</nav>
+			<div class="mx-10 my-6">
+				if tabType == "prescription" {
+					@PrescriptionTable(data.Composition.MtxReport.Prescription)
+				} else if tabType == "lab" {
+					@TestTable(data.Composition.MtxReport.LabResults)
+				}
+			</div>
+		</div>
+	</div>
+}
+
+templ PrescriptionTable(results model.Prescription) {
+	<table class="table-fixed w-full mt-1 text-sm rounded-lg">
+		<thead>
+			<tr class="p-2 font-semibold bg-zinc-300 tracking-wide">
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Medication</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Date started</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Date ended</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Dose</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Prescribed by</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Dispensed by</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="align-top">
+				<td class="p-2 border border-zinc-400 w-1/6">Methotrexate</td>
+				<td class="p-2 border border-zinc-400 w-1/6">1/2/24</td>
+				<td class="p-2 border border-zinc-400 w-1/6">-</td>
+				<td class="p-2 border border-zinc-400 w-1/6">15mg</td>
+				<td class="p-2 border border-zinc-400 w-1/6">Dr Andrew</td>
+				<td class="p-2 border border-zinc-400 w-1/6">Esther</td>
+			</tr>
+		</tbody>
+	</table>
+}
+
+templ TestTable(results model.LabResults) {
+	<table class="table-fixed w-full mt-1 text-sm rounded-lg">
+		<thead>
+			<tr class="p-2 font-semibold bg-zinc-300 tracking-wide">
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Lab</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Reference Range</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">1/2/24 - 8.00am</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">14/2/24 - 8.00am</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">28/2/24 - 8.00am</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">13/3/24 - 8.00am</td>
+			</tr>
+		</thead>
+		<tbody>
+			@TestSection("Full Blood Count")
+			@TestRow("Hemoglobin", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Unit))
+			@TestRow("White blood cell", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Unit))
+			@TestRow("Lymphocyte", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Unit))
+			@TestRow("Neutrophils", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Unit))
+			@TestRow("Platelets", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Unit))
+			@TestSection("Liver Function Test")
+			@TestRow("AST", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude, results[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Unit))
+			@TestRow("ALT", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude, results[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Unit))
+			@TestSection("Urea & Electrolytes")
+			@TestRow("Creatinine", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude, results[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Unit))
+			@TestRow("Sodium", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude, results[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Unit))
+			@TestRow("Potassium", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude, results[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Unit))
+			@TestRow("Urea", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude, results[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Unit))
+		</tbody>
+	</table>
+}
+
+templ TestSection(title string) {
+	<tr class="p-2 font-medium bg-zinc-200">
+		<td class="p-2 w-1/6 text-zinc-600 border border-zinc-400">{ title }</td>
+		for i := 0; i < 5; i++ {
+			<td class="p-2 border border-zinc-400 w-1/6"></td>
+		}
+	</tr>
+}
+
+templ TestRow(k, refRange, v string) {
+	<tr class="align-top">
+		<td class="p-2 font-medium border border-zinc-400">{ k }</td>
+		<td class="p-2 border border-zinc-400 w-1/6">{ refRange } </td>
+		for i := 0; i < 4; i++ {
+			<td class="p-2 border border-zinc-400 w-1/6">{ v } </td>
+		}
+	</tr>
+}

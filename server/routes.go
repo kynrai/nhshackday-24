@@ -5,6 +5,8 @@ import (
 	"io/fs"
 	"log"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 //go:embed assets
@@ -22,5 +24,8 @@ func (s *Server) Routes() {
 	s.r.Get("/sms", s.handleSendSMS)
 	s.r.Get("/dummy", s.handleDummy)
 	s.r.Post("/send", s.handleSendWS)
-	s.r.Get("/clinician-view", s.handleClinicianView)
+	s.r.Get("/clinician", s.handleClinicianView)
+	s.r.Route("/hx", func(r chi.Router) {
+		r.Get("/nav/{type}", s.handleNav)
+	})
 }
