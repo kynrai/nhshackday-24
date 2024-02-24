@@ -6,9 +6,11 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
 	"github.com/kynrai/nhshackday-24/model"
 	"github.com/kynrai/nhshackday-24/ui"
+	"github.com/kynrai/nhshackday-24/ui/clinician"
 )
 
 func (s *Server) handlePing(w http.ResponseWriter, r *http.Request) {
@@ -92,6 +94,28 @@ func (s *Server) handleDummy(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
+
+	data, err := s.ian.Read()
+	tabType := "prescription"
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html")
+	ui.Index(clinician.ClinicianView(tabType, *data)).Render(r.Context(), w)
+}
+
+func (s *Server) handlePageIndex(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("HX-Redirect", "/clinician-view/prescription")
+}
+
+func (s *Server) handleNav(w http.ResponseWriter, r *http.Request) {
+	tabType := chi.URLParam(r, "type")
+	if tabType == "" {
+		tabType = "prescription"
+	}
 	data, err := s.ian.Read()
 
 	if err != nil {
@@ -100,5 +124,5 @@ func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html")
-	ui.Index().Render(r.Context(), w)
+	clinician.ClinicianView(tabType, *data).Render(r.Context(), w)
 }

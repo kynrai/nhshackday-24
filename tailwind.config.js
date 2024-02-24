@@ -2,7 +2,14 @@
 module.exports = {
   content: ["./ui/**/*.templ"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+      },
+      colors: {
+        "dhcw-blue": "#688cb4",
+      },
+    },
   },
   plugins: [],
 }
