@@ -9,9 +9,9 @@ templ Index(page templ.Component) {
 		<link rel="stylesheet" href="/assets/css/styles.css"/>
 		<script src="/assets/js/htmx.min.js"></script>
 		<script src="/assets/js/hyperscript.min.js"></script>
-		// <script src="/assets/js/json-enc.js"></script>
 		<script src="/assets/js/idiomorph-ext.min.js"></script>
-		<body hx-ext="morph, json-enc" class="mx-10 flex flex-col min-h-screen">
+		<script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
+		<body hx-ext="morph" class="mx-10 flex flex-col min-h-screen">
 			@Header()
 			<main class="flex-1 overflow-auto h-screen">
 				@page

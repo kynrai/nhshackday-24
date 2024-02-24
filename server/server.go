@@ -6,44 +6,19 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/gorilla/websocket"
-	"gorm.io/gorm"
 )
 
 type Server struct {
 	r       *chi.Mux
-	db      *gorm.DB
 	tw      *Twilio
 	ian     *IanClient
 	clients map[string]*websocket.Conn
 }
-type Product struct {
-	gorm.Model
-	Code  string
-	Price uint
-}
-
-func auth(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Header.Get("Authorization") != "nshhackday2024" {
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
-}
 
 func NewServer(conf Config) (*Server, error) {
-	db, err := NewDB("data.db")
-	if err != nil {
-		return nil, err
-	}
-	r := chi.NewRouter()
-	// r.Use(auth)
-	db.AutoMigrate(&Product{})
 	return &Server{
-		r:       r,
+		r:       chi.NewRouter(),
 		tw:      NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom),
-		db:      db,
 		ian:     NewIanClient(),
 		clients: make(map[string]*websocket.Conn),
 	}, nil

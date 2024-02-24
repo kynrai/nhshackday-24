@@ -1,0 +1,37 @@
+package ui
+
+templ Connections(addrs []string) {
+	<div class="flex flex-col">
+		<p>Connections</p>
+		for _, addr := range addrs {
+			<form class="flex">
+				<input type="text" name="addr" value={ addr }/>
+				<label>
+					{ addr }
+					<button
+						hx-post="/notify"
+						hx-swap="none"
+					>Notify</button>
+				</label>
+			</form>
+		}
+	</div>
+}
+
+templ Message(msg string) {
+	<div id="notifications" hx-swap-oob="beforeend">
+		{ msg }
+	</div>
+}
+
+templ Notifications() {
+	<p>Notifications</p>
+	<div
+		class=""
+		hx-ext="ws"
+		ws-connect="/ws"
+		hx-ext="ignore:morph"
+	>
+		<div id="notifications"></div>
+	</div>
+}

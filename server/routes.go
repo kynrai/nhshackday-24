@@ -23,7 +23,10 @@ func (s *Server) Routes() {
 	s.r.Get("/ws", s.handleWS)
 	s.r.Get("/sms", s.handleSendSMS)
 	s.r.Get("/dummy", s.handleDummy)
-	s.r.Post("/send", s.handleSendWS)
+	s.r.Post("/notify", s.handleNotify)
+	s.r.Get("/notifications", s.handlePageNotifications)
+	s.r.Get("/cons", s.handlePageConnections)
+
 	s.r.Get("/clinician", s.handleClinicianView)
 	s.r.Route("/hx", func(r chi.Router) {
 		r.Get("/nav/{type}", s.handleNav)
