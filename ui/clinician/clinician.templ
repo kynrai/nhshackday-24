@@ -49,31 +49,61 @@ templ ClinicianView(tabType string, data model.Data) {
 }
 
 templ PrescriptionTable(results model.Prescription) {
+	<div class="flex flex-col border-2 border-red-500 w-full mb-6 p-4 gap-2">
+		<div>
+			Patient's next blood test is due on <span class="text-red-500">27/3/24</span>. Send a reminder to the patient to book an appointment?
+		</div>
+		<div class="flex gap-4">
+			<button
+				hx-get="/hx/sms-reminder"
+				hx-swap="none"
+				class="px-4 py-2 rounded-lg w-fit bg-green-400"
+				type="button"
+			>Send SMS</button>
+			<button class="px-4 py-2 rounded-lg w-fit bg-green-400" type="button">Send via App</button>
+		</div>
+	</div>
 	<table class="table-fixed w-full mt-1 text-sm rounded-lg">
 		<thead>
 			<tr class="p-2 font-semibold bg-zinc-300 tracking-wide">
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Medication</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Date started</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Date ended</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Dose</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Prescribed by</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Dispensed by</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600">Medication</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600">Date started</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600">Date ended</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600">Dose</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600">Prescribed by</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600">Dispensed by</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600">Last blood test</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr class="align-top">
-				<td class="p-2 border border-zinc-400 w-1/6">Methotrexate</td>
-				<td class="p-2 border border-zinc-400 w-1/6">1/2/24</td>
-				<td class="p-2 border border-zinc-400 w-1/6">-</td>
-				<td class="p-2 border border-zinc-400 w-1/6">15mg</td>
-				<td class="p-2 border border-zinc-400 w-1/6">Dr Andrew</td>
-				<td class="p-2 border border-zinc-400 w-1/6">Esther</td>
+				<td class="p-2 border border-zinc-400">Methotrexate</td>
+				<td class="p-2 border border-zinc-400">1/2/24</td>
+				<td class="p-2 border border-zinc-400">-</td>
+				<td class="p-2 border border-zinc-400">15mg</td>
+				<td class="p-2 border border-zinc-400">Dr Andrew</td>
+				<td class="p-2 border border-zinc-400">Esther</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600">13/3/24</td>
 			</tr>
 		</tbody>
 	</table>
 }
 
 templ TestTable(results model.LabResults) {
+	<div class="flex flex-col border-2 border-red-500 w-full mb-6 p-4 gap-2">
+		<div>
+			Patient's blood test results are not within the normal range. Send an alert to the patient to stop taking the medication immediately.
+		</div>
+		<div class="flex gap-4">
+			<button
+				hx-get="/hx/sms-alert"
+				hx-swap="none"
+				class="px-4 py-2 rounded-lg w-fit bg-green-400"
+				type="button"
+			>Send SMS</button>
+			<button class="px-4 py-2 rounded-lg w-fit bg-green-400" type="button">Send via App</button>
+		</div>
+	</div>
 	<table class="table-fixed w-full mt-1 text-sm rounded-lg">
 		<thead>
 			<tr class="p-2 font-semibold bg-zinc-300 tracking-wide">

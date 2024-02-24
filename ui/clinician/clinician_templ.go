@@ -142,7 +142,7 @@ func PrescriptionTable(results model.Prescription) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full mt-1 text-sm rounded-lg\"><thead><tr class=\"p-2 font-semibold bg-zinc-300 tracking-wide\"><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Medication</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Date started</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Date ended</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Dose</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Prescribed by</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Dispensed by</td></tr></thead> <tbody><tr class=\"align-top\"><td class=\"p-2 border border-zinc-400 w-1/6\">Methotrexate</td><td class=\"p-2 border border-zinc-400 w-1/6\">1/2/24</td><td class=\"p-2 border border-zinc-400 w-1/6\">-</td><td class=\"p-2 border border-zinc-400 w-1/6\">15mg</td><td class=\"p-2 border border-zinc-400 w-1/6\">Dr Andrew</td><td class=\"p-2 border border-zinc-400 w-1/6\">Esther</td></tr></tbody></table>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col border-2 border-red-500 w-full mb-6 p-4 gap-2\"><div>Patient's next blood test is due on <span class=\"text-red-500\">27/3/24</span>. Send a reminder to the patient to book an appointment?</div><div class=\"flex gap-4\"><button hx-get=\"/hx/sms-reminder\" hx-swap=\"none\" class=\"px-4 py-2 rounded-lg w-fit bg-green-400\" type=\"button\">Send SMS</button> <button class=\"px-4 py-2 rounded-lg w-fit bg-green-400\" type=\"button\">Send via App</button></div></div><table class=\"table-fixed w-full mt-1 text-sm rounded-lg\"><thead><tr class=\"p-2 font-semibold bg-zinc-300 tracking-wide\"><td class=\"p-2 border border-zinc-400 text-zinc-600\">Medication</td><td class=\"p-2 border border-zinc-400 text-zinc-600\">Date started</td><td class=\"p-2 border border-zinc-400 text-zinc-600\">Date ended</td><td class=\"p-2 border border-zinc-400 text-zinc-600\">Dose</td><td class=\"p-2 border border-zinc-400 text-zinc-600\">Prescribed by</td><td class=\"p-2 border border-zinc-400 text-zinc-600\">Dispensed by</td><td class=\"p-2 border border-zinc-400 text-zinc-600\">Last blood test</td></tr></thead> <tbody><tr class=\"align-top\"><td class=\"p-2 border border-zinc-400\">Methotrexate</td><td class=\"p-2 border border-zinc-400\">1/2/24</td><td class=\"p-2 border border-zinc-400\">-</td><td class=\"p-2 border border-zinc-400\">15mg</td><td class=\"p-2 border border-zinc-400\">Dr Andrew</td><td class=\"p-2 border border-zinc-400\">Esther</td><td class=\"p-2 border border-zinc-400 text-zinc-600\">13/3/24</td></tr></tbody></table>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -166,7 +166,7 @@ func TestTable(results model.LabResults) templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"table-fixed w-full mt-1 text-sm rounded-lg\"><thead><tr class=\"p-2 font-semibold bg-zinc-300 tracking-wide\"><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Lab</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Reference Range</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">1/2/24 - 8.00am</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">14/2/24 - 8.00am</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">28/2/24 - 8.00am</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">13/3/24 - 8.00am</td></tr></thead> <tbody>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col border-2 border-red-500 w-full mb-6 p-4 gap-2\"><div>Patient's blood test results are not within the normal range. Send an alert to the patient to stop taking the medication immediately.</div><div class=\"flex gap-4\"><button hx-get=\"/hx/sms-alert\" hx-swap=\"none\" class=\"px-4 py-2 rounded-lg w-fit bg-green-400\" type=\"button\">Send SMS</button> <button class=\"px-4 py-2 rounded-lg w-fit bg-green-400\" type=\"button\">Send via App</button></div></div><table class=\"table-fixed w-full mt-1 text-sm rounded-lg\"><thead><tr class=\"p-2 font-semibold bg-zinc-300 tracking-wide\"><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Lab</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">Reference Range</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">1/2/24 - 8.00am</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">14/2/24 - 8.00am</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">28/2/24 - 8.00am</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/6\">13/3/24 - 8.00am</td></tr></thead> <tbody>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -257,7 +257,7 @@ func TestSection(title string) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 108, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 138, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -304,7 +304,7 @@ func TestRow(k, refRange, v string) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(k)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 117, Col: 56}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 147, Col: 56}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -317,7 +317,7 @@ func TestRow(k, refRange, v string) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(refRange)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 118, Col: 57}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 148, Col: 57}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
@@ -335,7 +335,7 @@ func TestRow(k, refRange, v string) templ.Component {
 			var templ_7745c5c3_Var12 string
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(v)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 120, Col: 51}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 150, Col: 51}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 			if templ_7745c5c3_Err != nil {

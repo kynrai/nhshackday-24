@@ -30,5 +30,7 @@ func (s *Server) Routes() {
 	s.r.Get("/clinician", s.handleClinicianView)
 	s.r.Route("/hx", func(r chi.Router) {
 		r.Get("/nav/{type}", s.handleNav)
+		r.Get("/sms-reminder", s.handleSMSReminder)
+		r.Get("/sms-alert", s.handleSMSAlert)
 	})
 }
