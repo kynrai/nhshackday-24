@@ -9,6 +9,7 @@ require (
 )
 
 require (
+	github.com/a-h/templ v0.2.543 // indirect
 	github.com/go-chi/chi/v5 v5.0.12 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect

@@ -3,6 +3,7 @@ package server
 import (
 	_ "embed"
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -21,21 +22,18 @@ var upgrader = websocket.Upgrader{
 }
 
 func (s *Server) handleSendWS(w http.ResponseWriter, r *http.Request) {
-	connection, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
+	r.ParseForm()
+	addr := r.FormValue("addr")
+	if addr == "" {
+		http.Error(w, "addr query parameter is required", http.StatusBadRequest)
 		return
 	}
-	s.clients[r.RemoteAddr] = connection
-
-	for {
-		mt, message, err := connection.ReadMessage()
-		if err != nil || mt == websocket.CloseMessage {
-			break // Exit the loop if the client tries to close the connection or the connection with the interrupted client
-		}
-		connection.WriteMessage(websocket.TextMessage, message)
+	conn, ok := s.clients[addr]
+	if !ok {
+		http.Error(w, "No client with that address", http.StatusBadRequest)
+		return
 	}
-	connection.Close()
+	conn.WriteMessage(websocket.TextMessage, []byte("Hello, World!"))
 }
 
 func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
@@ -44,6 +42,7 @@ func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
 		return
 	}
+	log.Println("Client connected:", r.RemoteAddr)
 	s.clients[r.RemoteAddr] = connection
 
 	for {
@@ -54,6 +53,7 @@ func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
 		connection.WriteMessage(websocket.TextMessage, message)
 	}
 	connection.Close()
+	delete(s.clients, r.RemoteAddr)
 }
 
 func (s *Server) handleSubmit(w http.ResponseWriter, r *http.Request) {
@@ -93,5 +93,5 @@ func (s *Server) handleDummy(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	ui.Index().Render(r.Context(), w)
+	ui.Index(nil).Render(r.Context(), w)
 }

@@ -6,5 +6,6 @@ func (s *Server) Routes() {
 	s.r.HandleFunc("GET /ws", s.handleWS)
 	s.r.HandleFunc("GET /sms", s.handleSendSMS)
 	s.r.HandleFunc("GET /dummy", s.handleDummy)
+	s.r.HandleFunc("POST /send", s.handleSendWS)
 	s.r.HandleFunc("GET /clinician-view", s.handleClinicianView)
 }
