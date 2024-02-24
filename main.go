@@ -1,7 +1,16 @@
 package main
 
-import "github.com/kynrai/nhshackday-24/server"
+import (
+	"log"
+
+	"github.com/kynrai/nhshackday-24/server"
+)
 
 func main() {
-	server.NewServer().Start()
+	conf := server.NewConfig()
+	srv, err := server.NewServer(conf)
+	if err != nil {
+		log.Fatal(err)
+	}
+	srv.Start()
 }

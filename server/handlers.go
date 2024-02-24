@@ -33,3 +33,15 @@ func (s *Server) handleSubmit(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Data received"))
 	// do something with data
 }
+
+func (s *Server) handleSendSMS(w http.ResponseWriter, r *http.Request) {
+	// send sms
+	resp, err := s.tw.SendSMS("+447927303651", "Twilio", "Hello, World!")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	enc := json.NewEncoder(w)
+	enc.SetIndent("", "  ")
+	enc.Encode(resp)
+}
