@@ -5,14 +5,16 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/gorilla/websocket"
 	"gorm.io/gorm"
 )
 
 type Server struct {
-	r   *chi.Mux
-	db  *gorm.DB
-	tw  *Twilio
-	ian *IanClient
+	r       *chi.Mux
+	db      *gorm.DB
+	tw      *Twilio
+	ian     *IanClient
+	clients map[string]*websocket.Conn
 }
 type Product struct {
 	gorm.Model
@@ -39,10 +41,11 @@ func NewServer(conf Config) (*Server, error) {
 	// r.Use(auth)
 	db.AutoMigrate(&Product{})
 	return &Server{
-		r:   r,
-		tw:  NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom),
-		db:  db,
-		ian: NewIanClient(),
+		r:       r,
+		tw:      NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom),
+		db:      db,
+		ian:     NewIanClient(),
+		clients: make(map[string]*websocket.Conn),
 	}, nil
 }
 
