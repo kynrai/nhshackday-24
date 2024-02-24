@@ -9,9 +9,10 @@ import (
 )
 
 type Server struct {
-	r  *chi.Mux
-	db *gorm.DB
-	tw *Twilio
+	r   *chi.Mux
+	db  *gorm.DB
+	tw  *Twilio
+	ian *IanClient
 }
 type Product struct {
 	gorm.Model
@@ -35,12 +36,13 @@ func NewServer(conf Config) (*Server, error) {
 		return nil, err
 	}
 	r := chi.NewRouter()
-	r.Use(auth)
+	// r.Use(auth)
 	db.AutoMigrate(&Product{})
 	return &Server{
-		r:  r,
-		tw: NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom),
-		db: db,
+		r:   r,
+		tw:  NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom),
+		db:  db,
+		ian: NewIanClient(),
 	}, nil
 }
 

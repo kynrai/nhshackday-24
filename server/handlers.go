@@ -1,6 +1,7 @@
 package server
 
 import (
+	_ "embed"
 	"encoding/json"
 	"net/http"
 
@@ -19,8 +20,20 @@ var upgrader = websocket.Upgrader{
 }
 
 func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
-	connection, _ := upgrader.Upgrade(w, r, nil)
-	connection.Close() // Close connection
+	connection, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		http.Error(w, "Could not open websocket connection", http.StatusBadRequest)
+		return
+	}
+
+	for {
+		mt, message, err := connection.ReadMessage()
+		if err != nil || mt == websocket.CloseMessage {
+			break // Exit the loop if the client tries to close the connection or the connection with the interrupted client
+		}
+		connection.WriteMessage(websocket.TextMessage, message)
+	}
+	connection.Close()
 }
 
 func (s *Server) handleSubmit(w http.ResponseWriter, r *http.Request) {
@@ -44,4 +57,16 @@ func (s *Server) handleSendSMS(w http.ResponseWriter, r *http.Request) {
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
 	enc.Encode(resp)
+}
+
+func (s *Server) handleDummy(w http.ResponseWriter, r *http.Request) {
+	data, err := s.ian.Read()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	enc := json.NewEncoder(w)
+	enc.SetIndent("", "  ")
+	enc.Encode(data)
 }
