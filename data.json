@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "href": "https://cdr.code4health.org/rest/v1/composition/dcfbeaac-41b9-4436-8bdf-205bd5b6abf5::7815d0e1-7902-453c-835a-f2a57c5dfe57::1"
+  },
+  "compositionUid": "dcfbeaac-41b9-4436-8bdf-205bd5b6abf5::7815d0e1-7902-453c-835a-f2a57c5dfe57::1",
+  "format": "STRUCTURED",
+  "templateId": "NHSHACK - MTX report",
+  "composition": {
+    "mtx_report": {
+      "_uid": [
+        "dcfbeaac-41b9-4436-8bdf-205bd5b6abf5::7815d0e1-7902-453c-835a-f2a57c5dfe57::1"
+      ],
+      "language": [
+        {
+          "|code": "en",
+          "|terminology": "ISO_639-1"
+        }
+      ],
+      "territory": [
+        {
+          "|code": "US",
+          "|terminology": "ISO_3166-1"
+        }
+      ],
+      "context": [
+        {
+          "start_time": [
+            "2024-02-24T14:25:06.851Z"
+          ],
+          "setting": [
+            {
+              "|code": "238",
+              "|value": "other care",
+              "|terminology": "openehr"
+            }
+          ]
+        }
+      ],
+      "lab_results": [
+        {
+          "_uid": [
+            "635ca4ff-e5ad-426d-bb44-7945d9d6639c"
+          ],
+          "full_blood_count": [
+            {
+              "_uid": [
+                "244cd02b-8d72-4809-a690-0716b1d68383"
+              ],
+              "test_name": [
+                "FBC"
+              ],
+              "hb": [
+                {
+                  "analyte_name": [
+                    "Hb"
+                  ],
+                  "analyte_result": [
+                    {
+                      "|magnitude": 6.26,
+                      "|unit": "?"
+                    }
+                  ],
+                  "reference_range_guidance": [
+                    "Reference range guidance 78"
+                  ]
+                }
+              ],
+              "wbc": [
+                {
+                  "analyte_name": [
+                    "Wbc"
+                  ],
+                  "analyte_result": [
+                    {
+                      "|magnitude": 22.45,
+                      "|unit": "?"
+                    }
+                  ],
+                  "reference_range_guidance": [
+                    "Reference range guidance 93"
+                  ]
+                }
+              ],
+              "time": [
+                "2024-02-24T14:25:06.854Z"
+              ],
+              "language": [
+                {
+                  "|code": "en",
+                  "|terminology": "ISO_639-1"
+                }
+              ],
+              "encoding": [
+                {
+                  "|code": "UTF-8",
+                  "|terminology": "IANA_character-sets"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "prescription": [
+        {
+          "_uid": [
+            "22390a1b-8ea0-4859-9110-d90dfe62a033"
+          ],
+          "medication_use_statement": [
+            {
+              "_uid": [
+                "eb2cf511-b567-4f82-a3ec-8a66e1da5ac4"
+              ],
+              "medication_name": [
+                "Medication name 27"
+              ],
+              "overall_directions_description": [
+                "Overall directions description 18"
+              ],
+              "route_of_administration": [
+                "Route of administration 59"
+              ],
+              "clinical_indication": [
+                "Clinical indication 28"
+              ],
+              "time": [
+                "2024-02-24T14:25:06.854Z"
+              ],
+              "language": [
+                {
+                  "|code": "en",
+                  "|terminology": "ISO_639-1"
+                }
+              ],
+              "encoding": [
+                {
+                  "|code": "UTF-8",
+                  "|terminology": "IANA_character-sets"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "body_weight": [
+        {
+          "_uid": [
+            "a7b4881a-00e5-4b00-b153-86e217ae317c"
+          ],
+          "weight": [
+            {
+              "|magnitude": 279.64,
+              "|unit": "kg"
+            }
+          ],
+          "time": [
+            "2024-02-24T14:25:06.855Z"
+          ],
+          "language": [
+            {
+              "|code": "en",
+              "|terminology": "ISO_639-1"
+            }
+          ],
+          "encoding": [
+            {
+              "|code": "UTF-8",
+              "|terminology": "IANA_character-sets"
+            }
+          ]
+        }
+      ],
+      "height_length": [
+        {
+          "_uid": [
+            "a41d2bf4-17a5-4d2a-825d-24e611e9e066"
+          ],
+          "_other_participation": [
+            {
+              "|function": "performer",
+              "|mode": "not specified",
+              "|name": "Nurse Bailey"
+            },
+            {
+              "|function": "requester",
+              "|mode": "not specified",
+              "|name": "Dr. Stiles"
+            }
+          ],
+          "height_length": [
+            {
+              "|magnitude": 956.9,
+              "|unit": "cm"
+            }
+          ],
+          "time": [
+            "2024-02-24T14:25:06.855Z"
+          ],
+          "language": [
+            {
+              "|code": "en",
+              "|terminology": "ISO_639-1"
+            }
+          ],
+          "encoding": [
+            {
+              "|code": "UTF-8",
+              "|terminology": "IANA_character-sets"
+            }
+          ]
+        }
+      ],
+      "category": [
+        {
+          "|code": "433",
+          "|value": "event",
+          "|terminology": "openehr"
+        }
+      ],
+      "composer": [
+        {
+          "|name": "Silvia Blake"
+        }
+      ]
+    }
+  },
+  "deleted": false,
+  "lastVersion": true,
+  "ehrId": "0a91593c-a495-4a16-8d67-6be3c8bc5aa5",
+  "lifecycleState": "COMPLETE",
+  "committerName": "Dr Franke",
+  "changeType": "CREATION",
+  "committedTimestamp": "2024-02-24T14:55:44.423Z"
+}
