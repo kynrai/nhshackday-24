@@ -41,14 +41,38 @@ type Data struct {
 						} `json:"analyte_result"`
 						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
 					} `json:"hb"`
-					Wbc []struct {
+					TotalWhiteCellCount []struct {
 						AnalyteName   []string `json:"analyte_name"`
 						AnalyteResult []struct {
 							Magnitude float64 `json:"|magnitude"`
 							Unit      string  `json:"|unit"`
 						} `json:"analyte_result"`
 						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
-					} `json:"wbc"`
+					} `json:"total_white_cell_count"`
+					Platelets []struct {
+						AnalyteName   []string `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"platelets"`
+					Neutrophils []struct {
+						AnalyteName   []string `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"neutrophils"`
+					Lymphocytes []struct {
+						AnalyteName   []string `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"lymphocytes"`
 					Time     []time.Time `json:"time"`
 					Language []struct {
 						Code        string `json:"|code"`
@@ -59,17 +83,103 @@ type Data struct {
 						Terminology string `json:"|terminology"`
 					} `json:"encoding"`
 				} `json:"full_blood_count"`
+				LiverFunctionTests []struct {
+					UID      []string `json:"_uid"`
+					TestName []string `json:"test_name"`
+					Ast      []struct {
+						AnalyteName   []string `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"ast"`
+					Alt []struct {
+						AnalyteName   []string `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"alt"`
+					Time     []time.Time `json:"time"`
+					Language []struct {
+						Code        string `json:"|code"`
+						Terminology string `json:"|terminology"`
+					} `json:"language"`
+					Encoding []struct {
+						Code        string `json:"|code"`
+						Terminology string `json:"|terminology"`
+					} `json:"encoding"`
+				} `json:"liver_function_tests"`
+				UreaAndElectrolytes []struct {
+					UID        []string `json:"_uid"`
+					TestName   []string `json:"test_name"`
+					Creatinine []struct {
+						AnalyteName []struct {
+							Code        string `json:"|code"`
+							Value       string `json:"|value"`
+							Terminology string `json:"|terminology"`
+						} `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"creatinine"`
+					Sodium []struct {
+						AnalyteName []struct {
+							Code        string `json:"|code"`
+							Value       string `json:"|value"`
+							Terminology string `json:"|terminology"`
+						} `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"sodium"`
+					Potassium []struct {
+						AnalyteName   []string `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"potassium"`
+					Urea []struct {
+						AnalyteName   []string `json:"analyte_name"`
+						AnalyteResult []struct {
+							Magnitude float64 `json:"|magnitude"`
+							Unit      string  `json:"|unit"`
+						} `json:"analyte_result"`
+						ReferenceRangeGuidance []string `json:"reference_range_guidance"`
+					} `json:"urea"`
+					Time     []time.Time `json:"time"`
+					Language []struct {
+						Code        string `json:"|code"`
+						Terminology string `json:"|terminology"`
+					} `json:"language"`
+					Encoding []struct {
+						Code        string `json:"|code"`
+						Terminology string `json:"|terminology"`
+					} `json:"encoding"`
+				} `json:"urea_and_electrolytes"`
 			} `json:"lab_results"`
 			Prescription []struct {
 				UID                    []string `json:"_uid"`
 				MedicationUseStatement []struct {
-					UID                          []string    `json:"_uid"`
-					MedicationName               []string    `json:"medication_name"`
-					OverallDirectionsDescription []string    `json:"overall_directions_description"`
-					RouteOfAdministration        []string    `json:"route_of_administration"`
-					ClinicalIndication           []string    `json:"clinical_indication"`
-					Time                         []time.Time `json:"time"`
-					Language                     []struct {
+					UID                          []string `json:"_uid"`
+					MedicationName               []string `json:"medication_name"`
+					OverallDirectionsDescription []string `json:"overall_directions_description"`
+					RouteOfAdministration        []string `json:"route_of_administration"`
+					ClinicalIndication           []struct {
+						Code        string `json:"|code"`
+						Value       string `json:"|value"`
+						Terminology string `json:"|terminology"`
+					} `json:"clinical_indication"`
+					Time     []time.Time `json:"time"`
+					Language []struct {
 						Code        string `json:"|code"`
 						Terminology string `json:"|terminology"`
 					} `json:"language"`
@@ -96,12 +206,7 @@ type Data struct {
 				} `json:"encoding"`
 			} `json:"body_weight"`
 			HeightLength []struct {
-				UID                []string `json:"_uid"`
-				OtherParticipation []struct {
-					Function string `json:"|function"`
-					Mode     string `json:"|mode"`
-					Name     string `json:"|name"`
-				} `json:"_other_participation"`
+				UID          []string `json:"_uid"`
 				HeightLength []struct {
 					Magnitude float64 `json:"|magnitude"`
 					Unit      string  `json:"|unit"`
@@ -116,6 +221,18 @@ type Data struct {
 					Terminology string `json:"|terminology"`
 				} `json:"encoding"`
 			} `json:"height_length"`
+			EthnicIdentity []struct {
+				UID       []string `json:"_uid"`
+				Ethnicity []string `json:"ethnicity"`
+				Language  []struct {
+					Code        string `json:"|code"`
+					Terminology string `json:"|terminology"`
+				} `json:"language"`
+				Encoding []struct {
+					Code        string `json:"|code"`
+					Terminology string `json:"|terminology"`
+				} `json:"encoding"`
+			} `json:"ethnic_identity"`
 			Category []struct {
 				Code        string `json:"|code"`
 				Value       string `json:"|value"`

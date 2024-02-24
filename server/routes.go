@@ -21,5 +21,6 @@ func (s *Server) Routes() {
 	s.r.Get("/ws", s.handleWS)
 	s.r.Get("/sms", s.handleSendSMS)
 	s.r.Get("/dummy", s.handleDummy)
+	s.r.Post("/send", s.handleSendWS)
 	s.r.Get("/clinician-view", s.handleClinicianView)
 }
