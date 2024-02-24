@@ -93,5 +93,5 @@ func (s *Server) handleDummy(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
-	ui.Index(nil).Render(r.Context(), w)
+	ui.Index().Render(r.Context(), w)
 }
