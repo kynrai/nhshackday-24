@@ -3,7 +3,6 @@ package server
 import (
 	"encoding/json"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/kynrai/nhshackday-24/model"
@@ -38,11 +37,10 @@ func (i *IanClient) Read() (*model.Data, error) {
 		return nil, err
 	}
 	defer res.Body.Close()
-	// var data model.Data
-	// err = json.NewDecoder(res.Body).Decode(&data)
-	// if err != nil {
-	// return nil, err
-	// }
-	json.NewEncoder(os.Stdout).Encode(&res.Body)
-	return nil, nil
+	var data model.Data
+	err = json.NewDecoder(res.Body).Decode(&data)
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
 }
