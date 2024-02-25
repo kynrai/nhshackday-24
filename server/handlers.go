@@ -28,7 +28,7 @@ func (s *Server) handleSubmit(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handleSendSMS(w http.ResponseWriter, r *http.Request) {
 	// send sms
-	resp, err := s.tw.SendSMS("+447927303651", "Twilio", "Hello, World!")
+	resp, err := s.tw.SendSMS(s.tw.to, "Twilio", "Hello, World!")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -82,4 +82,28 @@ func (s *Server) handleNav(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/html")
 	clinician.ClinicianView(tabType, *data).Render(r.Context(), w)
+}
+
+func (s *Server) handleSMSReminder(w http.ResponseWriter, r *http.Request) {
+	// send sms
+	resp, err := s.tw.SendSMS(s.tw.to, "Twilio", "Reminder: Your next blood test is due on 23/3/2024. Please call 01234567890 to book an appointment with your GP.")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	enc := json.NewEncoder(w)
+	enc.SetIndent("", "  ")
+	enc.Encode(resp)
+}
+
+func (s *Server) handleSMSAlert(w http.ResponseWriter, r *http.Request) {
+	// send sms
+	resp, err := s.tw.SendSMS(s.tw.to, "Twilio", `*NHS ALERT*: Your blood test results are not within the normal range. Stop taking your medication IMMEDIATELY and call 01234567890 to book an appointment as soon as possible.`)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	enc := json.NewEncoder(w)
+	enc.SetIndent("", "  ")
+	enc.Encode(resp)
 }

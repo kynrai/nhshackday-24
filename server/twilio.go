@@ -8,15 +8,17 @@ import (
 type Twilio struct {
 	from   string
 	client *twilio.RestClient
+	to     string
 }
 
-func NewTwilio(sid, token, from string) *Twilio {
+func NewTwilio(sid, token, from, to string) *Twilio {
 	return &Twilio{
 		from: from,
 		client: twilio.NewRestClientWithParams(twilio.ClientParams{
 			Username: sid,
 			Password: token,
 		}),
+		to: to,
 	}
 }
 
