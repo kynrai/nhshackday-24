@@ -558,10 +558,6 @@ video {
   margin: 1rem;
 }
 
-.m-8{
-  margin: 2rem;
-}
-
 .mx-10{
   margin-left: 2.5rem;
   margin-right: 2.5rem;
@@ -570,14 +566,6 @@ video {
 .my-6{
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-}
-
-.mb-2{
-  margin-bottom: 0.5rem;
-}
-
-.mb-4{
-  margin-bottom: 1rem;
 }
 
 .mb-6{
@@ -592,8 +580,8 @@ video {
   margin-top: 0.25rem;
 }
 
-.mt-12{
-  margin-top: 3rem;
+.mt-6{
+  margin-top: 1.5rem;
 }
 
 .flex{
@@ -622,10 +610,6 @@ video {
 
 .h-6{
   height: 1.5rem;
-}
-
-.h-dvh{
-  height: 100dvh;
 }
 
 .h-full{
@@ -957,9 +941,9 @@ video {
   line-height: 2rem;
 }
 
-.text-4xl{
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
 }
 
 .text-lg{
