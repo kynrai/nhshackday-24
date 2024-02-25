@@ -1,7 +1,59 @@
 package patient
 
-templ Patient() {
-	<div class="flex flex-col justify-end h-screen">
-		@PatientNav()
+templ Patient(tabType string) {
+	<div class="flex flex-col h-screen">
+		@PatientMedicationPage()
+		@PatientNav(tabType)
+	</div>
+}
+
+templ PatienProfilePage() {
+	<div class="flex flex-col p-8 h-full items-center gap-6">
+		<div class="flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium">
+			My Medications
+		</div>
+		<div class="w-40 h-40 rounded-full bg-gray-300 p-8">
+			<img src="/assets/img/pill.svg"/>
+		</div>
+		<div class="flex items-center justify-center px-4 py-1 rounded-full bg-gray-200 w-full tracking-wide font-medium">
+			Methotrexate
+		</div>
+		<div class="flex flex-col gap-2 w-full">
+			@PatientMedicationRow("Current dose", "123 mg")
+			@PatientMedicationRow("Frequency", "123 mg")
+			@PatientMedicationRow("Duration", "123 mg")
+			@PatientMedicationRow("Indications", "123 mg")
+		</div>
+	</div>
+}
+
+templ PatientMedicationPage() {
+	<div class="flex flex-col p-8 h-full items-center gap-6">
+		<div class="flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium">
+			My Medications
+		</div>
+		<div class="w-40 h-40 rounded-full bg-gray-300 p-8">
+			<img src="/assets/img/pill.svg"/>
+		</div>
+		<div class="flex items-center justify-center px-4 py-1 rounded-full bg-gray-200 w-full tracking-wide font-medium">
+			Methotrexate
+		</div>
+		<div class="flex flex-col gap-2 w-full">
+			@PatientMedicationRow("Current dose", "123 mg")
+			@PatientMedicationRow("Frequency", "123 mg")
+			@PatientMedicationRow("Duration", "123 mg")
+			@PatientMedicationRow("Indications", "123 mg")
+		</div>
+	</div>
+}
+
+templ PatientMedicationRow(k,v string) {
+	<div class="flex justify-between items-center gap-2 text-sm">
+		<div class="font-medium">
+			{ k }
+		</div>
+		<div class="flex justify-center px-4 py-1 rounded-full bg-gray-200 w-2/3 text-sm tracking-wider">
+			{ v }
+		</div>
 	</div>
 }
