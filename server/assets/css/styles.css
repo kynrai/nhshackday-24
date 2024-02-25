@@ -544,6 +544,10 @@ video {
   top: 0px;
 }
 
+.m-4{
+  margin: 1rem;
+}
+
 .m-8{
   margin: 2rem;
 }
@@ -576,6 +580,10 @@ video {
 
 .mt-1{
   margin-top: 0.25rem;
+}
+
+.mt-12{
+  margin-top: 3rem;
 }
 
 .flex{
@@ -685,6 +693,10 @@ video {
 
 .items-center{
   align-items: center;
+}
+
+.justify-end{
+  justify-content: flex-end;
 }
 
 .justify-center{
