@@ -31,8 +31,7 @@ func (s *Server) Routes() {
 		r.Get("/patient-nav/{type}", s.handlePatientNav)
 	})
 
-	s.r.HandleFunc("/alertevents", s.handleAlertConnect)
+	s.r.HandleFunc("/notify", s.handleNofityConnect)
 	s.r.Post("/app-alert", s.handleSendAlert)
-	s.r.HandleFunc("/appointmentevents", s.handleAppointmentConnect)
 	s.r.Post("/app-reminder", s.handleSendAppointment)
 }

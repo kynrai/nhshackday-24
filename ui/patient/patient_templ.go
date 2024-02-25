@@ -242,7 +242,7 @@ func Appointment() templ.Component {
 			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"bg-green-300 w-screen h-screen\"><div class=\"flex justify-end\" hx-boost=\"true\"><a href=\"/patient\"><img class=\"h-10 m-4\" src=\"/assets/img/cross.svg\"></a></div></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"bg-green-300 w-screen h-screen\"><div class=\"flex justify-end\" hx-boost=\"true\"><a href=\"/patient\"><img class=\"h-10 m-4\" src=\"/assets/img/cross.svg\"></a></div><div class=\"flex flex-col justify-center items-center p-4 gap-6 mt-6\"><img class=\"h-40\" src=\"/assets/img/calendar.svg\"><p class=\"text-center font-bold text-5xl\">Appointment</p><div class=\"flex flex-col gap-2\"><p class=\"text-center\">You have an appointment with your GP at <span class=\"font-bold\">10:30am</span> on <span class=\"font-bold\">Monday 12th July</span>.</p><p class=\"text-center\">Please ensure you attend this appointment.</p></div><div><button class=\"flex items-center justify-center gap-1 bg-gray-100 rounded-2xl border-2 border-black px-4 py-2\"><img class=\"h-6\" src=\"/assets/img/calendar.svg\"><div class=\"text-2xl font-bold\">Add to Calendar</div></button></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
