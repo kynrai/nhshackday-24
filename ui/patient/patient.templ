@@ -22,9 +22,9 @@ templ PatientView(tabType string, data model.Data, labs []model.SingleMtxReport)
 	</div>
 }
 
-templ PatienProfilePage(data model.Data) {
-	<div class="w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center">
-		<div class="text-white font-medium text-center">My Profile</div>
+templ PatientProfilePage(data model.Data) {
+	<div class="w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center">
+		<div class="text-white font-medium text-center text-2xl tracking-wider">My Profile</div>
 	</div>
 	<div class="flex flex-col p-8 h-full items-center gap-6">
 		<div class="flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2">
@@ -148,11 +148,11 @@ func IsAbnormal(s string, result float64) bool {
 }
 
 templ PatientMedicationPage(results model.Prescription) {
-	<div class="w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center">
-		<div class="text-white font-medium text-center">My Medications</div>
+	<div class="w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center">
+		<div class="text-white font-medium text-center text-2xl tracking-wider">My Medications</div>
 	</div>
 	<div class="flex flex-col p-8 h-full items-center gap-6">
-		<div class="w-40 h-40 rounded-full p-8 border-2 border-nhs-grey-1 mb-8">
+		<div class="w-40 h-40 rounded-full p-8 border-2 border-nhs-grey-1">
 			<img src="/assets/img/pill.svg"/>
 		</div>
 		<div class="flex items-center justify-center px-4 py-2 w-full tracking-wide font-medium text-xl border-b-nhs-grey-1 border-b">

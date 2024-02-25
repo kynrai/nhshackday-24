@@ -67,7 +67,7 @@ func PatientView(tabType string, data model.Data, labs []model.SingleMtxReport) 
 	})
 }
 
-func PatienProfilePage(data model.Data) templ.Component {
+func PatientProfilePage(data model.Data) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -80,7 +80,7 @@ func PatienProfilePage(data model.Data) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center\"><div class=\"text-white font-medium text-center\">My Profile</div></div><div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2\"><svg class=\"w-40 h-40\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"></path></svg></div><div class=\"flex flex-col gap-2 w-full\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center\"><div class=\"text-white font-medium text-center text-2xl tracking-wider\">My Profile</div></div><div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2\"><svg class=\"w-40 h-40\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"></path></svg></div><div class=\"flex flex-col gap-2 w-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -675,7 +675,7 @@ func PatientMedicationPage(results model.Prescription) templ.Component {
 			templ_7745c5c3_Var38 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center\"><div class=\"text-white font-medium text-center\">My Medications</div></div><div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"w-40 h-40 rounded-full p-8 border-2 border-nhs-grey-1 mb-8\"><img src=\"/assets/img/pill.svg\"></div><div class=\"flex items-center justify-center px-4 py-2 w-full tracking-wide font-medium text-xl border-b-nhs-grey-1 border-b\">Methotrexate</div><div class=\"flex flex-col gap-2 w-full px-2\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center\"><div class=\"text-white font-medium text-center text-2xl tracking-wider\">My Medications</div></div><div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"w-40 h-40 rounded-full p-8 border-2 border-nhs-grey-1\"><img src=\"/assets/img/pill.svg\"></div><div class=\"flex items-center justify-center px-4 py-2 w-full tracking-wide font-medium text-xl border-b-nhs-grey-1 border-b\">Methotrexate</div><div class=\"flex flex-col gap-2 w-full px-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
