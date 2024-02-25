@@ -882,6 +882,11 @@ video {
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
+.text-nhs-blue-1{
+  --tw-text-opacity: 1;
+  color: rgb(0 114 206 / var(--tw-text-opacity));
+}
+
 .text-red-500{
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
@@ -897,7 +902,20 @@ video {
   color: rgb(82 82 91 / var(--tw-text-opacity));
 }
 
+.underline{
+  text-decoration-line: underline;
+}
+
+.underline-offset-4{
+  text-underline-offset: 4px;
+}
+
 .hover\:bg-blue-100:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(219 234 254 / var(--tw-bg-opacity));
+}
+
+.hover\:text-nhs-grey-3:hover{
+  --tw-text-opacity: 1;
+  color: rgb(66 85 99 / var(--tw-text-opacity));
 }

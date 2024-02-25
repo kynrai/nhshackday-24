@@ -9,9 +9,10 @@ templ ClinicianView(tabType string, data model.Data) {
 	<div id="clinician" class="flex h-screen">
 		<div class="w-[25%] h-screen border-r border-gray-400 pr-10 flex flex-col gap-4 items-stretch">
 			<button
-				class="px-4 py-2 rounded-md bg-nhs-green-2 text-white border-b-2 border-b-white"
 				type="button"
-			>Back to Patients</button>
+				class="flex gap-2 justify-center items-center"
+			><img src="/assets/img/chevron-left.svg"/><span class="text-nhs-blue-1 font-medium underline underline-offset-4 hover:text-nhs-grey-3">Back to Patients</span></button>
+	
 			<div class="flex flex-col gap-2 border-[1px] border-b-[4px] border-nhs-grey-2 p-6">
 				<div class="text-lg font-semibold">Patient Profile</div>
 				<div class="flex justify-between">

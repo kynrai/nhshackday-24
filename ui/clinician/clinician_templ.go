@@ -28,7 +28,7 @@ func ClinicianView(tabType string, data model.Data) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"clinician\" class=\"flex h-screen\"><div class=\"w-[25%] h-screen border-r border-gray-400 pr-10 flex flex-col gap-4 items-stretch\"><button class=\"px-4 py-2 rounded-md bg-nhs-green-2 text-white border-b-2 border-b-white\" type=\"button\">Back to Patients</button><div class=\"flex flex-col gap-2 border-[1px] border-b-[4px] border-nhs-grey-2 p-6\"><div class=\"text-lg font-semibold\">Patient Profile</div><div class=\"flex justify-between\"><div class=\"font-medium\">Name: </div><div>Alan</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Age: </div><div>33</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">DOB: </div><div>1/1/1999</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Gender: </div><div>M</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Height: </div><div>175cm</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Weight: </div><div>65kg</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Ethnicity: </div><div>White</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Language: </div><div>English</div></div></div></div><div id=\"tab\" class=\"flex flex-col w-[85%]\"><nav class=\"h-10 w-full border-b border-gray-400\"><ul class=\"ml-10 h-10 flex text-gray-500 cursor-pointer\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"clinician\" class=\"flex h-screen\"><div class=\"w-[25%] h-screen border-r border-gray-400 pr-10 flex flex-col gap-4 items-stretch\"><button type=\"button\" class=\"flex gap-2 justify-center items-center\"><img src=\"/assets/img/chevron-left.svg\"><span class=\"text-nhs-blue-1 font-medium underline underline-offset-4 hover:text-nhs-grey-3\">Back to Patients</span></button><div class=\"flex flex-col gap-2 border-[1px] border-b-[4px] border-nhs-grey-2 p-6\"><div class=\"text-lg font-semibold\">Patient Profile</div><div class=\"flex justify-between\"><div class=\"font-medium\">Name: </div><div>Alan</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Age: </div><div>33</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">DOB: </div><div>1/1/1999</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Gender: </div><div>M</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Height: </div><div>175cm</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Weight: </div><div>65kg</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Ethnicity: </div><div>White</div></div><div class=\"flex justify-between\"><div class=\"font-medium\">Language: </div><div>English</div></div></div></div><div id=\"tab\" class=\"flex flex-col w-[85%]\"><nav class=\"h-10 w-full border-b border-gray-400\"><ul class=\"ml-10 h-10 flex text-gray-500 cursor-pointer\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -257,7 +257,7 @@ func TestSection(title string) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 178, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 179, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -304,7 +304,7 @@ func TestRow(k, refRange, v string) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(k)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 187, Col: 56}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 188, Col: 56}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -317,7 +317,7 @@ func TestRow(k, refRange, v string) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(refRange)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 188, Col: 57}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 189, Col: 57}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
@@ -335,7 +335,7 @@ func TestRow(k, refRange, v string) templ.Component {
 			var templ_7745c5c3_Var12 string
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(v)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 190, Col: 51}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 191, Col: 51}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 			if templ_7745c5c3_Err != nil {

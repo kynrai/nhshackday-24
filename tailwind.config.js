@@ -12,6 +12,7 @@ module.exports = {
         "nhs-grey-0": "#FFFFFF",
         "nhs-grey-1": "#E8EDEE",
         "nhs-grey-2": "#768692",
+        "nhs-grey-3": "#425563",
         "nhs-green-2": "#009639",
         "nhs-purple-2": "#330072",
       },
