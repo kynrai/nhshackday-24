@@ -96,11 +96,11 @@ func PatientProfilePage(data model.SingleMtxReport) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+data.MtxReport.BodyWeight[0].Weight[0].Unit).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+" "+data.MtxReport.BodyWeight[0].Weight[0].Unit).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+data.MtxReport.HeightLength[0].HeightLength[0].Unit).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+" "+data.MtxReport.HeightLength[0].HeightLength[0].Unit).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -747,7 +747,7 @@ func PatientMedicationRow(k, v string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"flex justify-center px-4 py-1 w-2/3 text-sm tracking-wider\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"flex justify-center text-center px-4 py-1 w-2/3 text-sm tracking-wider\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

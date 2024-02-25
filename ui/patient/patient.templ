@@ -36,8 +36,8 @@ templ PatientProfilePage(data model.SingleMtxReport) {
 			@PatientMedicationRow("Name", "Alan Smith")
 			@PatientMedicationRow("Age", "33")
 			@PatientMedicationRow("Gender", "M")
-			@PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+data.MtxReport.BodyWeight[0].Weight[0].Unit)
-			@PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+data.MtxReport.HeightLength[0].HeightLength[0].Unit)
+			@PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+" "+data.MtxReport.BodyWeight[0].Weight[0].Unit)
+			@PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+" "+data.MtxReport.HeightLength[0].HeightLength[0].Unit)
 			@PatientMedicationRow("Ethnicity", data.MtxReport.EthnicIdentity[0].Ethnicity[0])
 		</div>
 	</div>
@@ -185,7 +185,7 @@ templ PatientMedicationRow(k,v string) {
 		<div class="font-medium">
 			{ k }
 		</div>
-		<div class="flex justify-center px-4 py-1 w-2/3 text-sm tracking-wider">
+		<div class="flex justify-center text-center px-4 py-1 w-2/3 text-sm tracking-wider">
 			{ v }
 		</div>
 	</div>
