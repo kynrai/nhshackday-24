@@ -85,12 +85,13 @@ templ Alert() {
 				<img class="h-10 m-4" src="/assets/img/cross.svg"/>
 			</a>
 		</div>
-		<div class="flex flex-col h-dvh mt-12 justify-center items-center">
-			<img class="h-40 m-8" src="/assets/img/warning-sign.svg"/>
-			<p class="text-center font-bold text-4xl mb-2">ALERT</p>
-			<p class="text-center mb-4">Your recent blood test results have come back <span class="font-bold">abnormal</span></p>
-			<p class="text-center"><span class="font-bold">DO</span> <span class="font-bold underline text-red-600">NOT</span> take the next dose of Methotrexate.</p>
-			<p class="text-center mb-4">Contact your doctor of pharmacy immediately for further information</p>
+		<div class="flex flex-col justify-center items-center p-4 gap-6 mt-6">
+			<img class="h-40" src="/assets/img/warning-sign.svg"/>
+			<p class="text-center font-bold text-5xl">ALERT</p>
+			<div class="flex flex-col gap-2">
+				<p class="text-center">Your recent blood test results have come back <span class="font-bold">abnormal.</span></p>
+				<p class="text-center"><span class="font-bold underline text-red-600">DO NOT</span> take the next dose of Methotrexate and call your GP as soon as possible.</p>
+			</div>
 			<div>
 				<button class="flex items-center justify-center gap-1 bg-gray-100 rounded-2xl border-2 border-black px-4 py-2">
 					<img class="h-6" src="/assets/img/phone.svg"/>
