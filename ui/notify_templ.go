@@ -23,7 +23,7 @@ func SSE() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>SSE Example with HTMX</h1><div hx-ext=\"sse\" sse-connect=\"/events\" sse-swap=\"message\">Contents of this box will be updated in real time with every SSE message received from the chatroom.</div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1>SSE Example with HTMX</h1><div hx-ext=\"sse\" sse-connect=\"/events\" sse-swap=\"message\">Contents of this box will be updated in real time with every SSE message received from the chatroom.</div><button hx-post=\"/notify\" hx-swap=\"none\">Send Message</button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

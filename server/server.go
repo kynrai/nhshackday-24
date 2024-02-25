@@ -5,14 +5,13 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/gorilla/websocket"
 )
 
 type Server struct {
 	r       *chi.Mux
 	tw      *Twilio
 	ian     *IanClient
-	clients map[string]*websocket.Conn
+	msgChan chan string
 }
 
 func NewServer(conf Config) (*Server, error) {
@@ -20,7 +19,7 @@ func NewServer(conf Config) (*Server, error) {
 		r:       chi.NewRouter(),
 		tw:      NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom, conf.TwilioTo),
 		ian:     NewIanClient(),
-		clients: make(map[string]*websocket.Conn),
+		msgChan: make(chan string),
 	}, nil
 }
 

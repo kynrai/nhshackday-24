@@ -20,16 +20,13 @@ func (s *Server) handleSSEConnect(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "no-cache")
 	w.Header().Set("Connection", "keep-alive")
 
-	// Create a channel to send data
-	dataCh := make(chan string)
-
 	// Create a context for handling client disconnection
 	_, cancel := context.WithCancel(r.Context())
 	defer cancel()
 
 	// Send data to the client
 	go func() {
-		for data := range dataCh {
+		for data := range s.msgChan {
 			fmt.Fprintf(w, "data: %s\n\n", data)
 			w.(http.Flusher).Flush()
 		}
@@ -37,11 +34,11 @@ func (s *Server) handleSSEConnect(w http.ResponseWriter, r *http.Request) {
 
 	// Simulate sending data periodically
 	for {
-		dataCh <- time.Now().Format(time.TimeOnly)
+		s.msgChan <- time.Now().Format(time.TimeOnly)
 		time.Sleep(1 * time.Second)
 	}
 }
 
 func (s *Server) handleNotify(w http.ResponseWriter, r *http.Request) {
-
+	s.msgChan <- "Msg from server"
 }
