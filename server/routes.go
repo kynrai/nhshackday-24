@@ -24,6 +24,7 @@ func (s *Server) Routes() {
 	s.r.Get("/dummy", s.handleDummy)
 	s.r.Post("/notify", s.handleNotify)
 	s.r.Get("/sse", s.handlePageSSE)
+	s.r.Get("/ssesend", s.handlePageSSESend)
 	s.r.HandleFunc("/events", s.handleSSEConnect)
 	s.r.Get("/clinician", s.handleClinicianView)
 	s.r.Route("/hx", func(r chi.Router) {
