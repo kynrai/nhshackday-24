@@ -1,415 +1,341 @@
 {
-    "mtx_report": {
-        "_uid": [
-            "611c5c31-a070-466e-a8b9-70dd6a66f1a4::example::1"
-        ],
-        "context": [
-            {
-                "start_time": [
-                    "2023-09-01T12:00:00.000Z"
+  "mtx_report": {
+    "_uid": ["611c5c31-a070-466e-a8b9-70dd6a66f1a4::example::1"],
+    "context": [
+      {
+        "start_time": ["2023-09-01T12:00:00.000Z"],
+        "setting": [
+          {
+            "|code": "238",
+            "|value": "other care",
+            "|terminology": "openehr"
+          }
+        ]
+      }
+    ],
+    "lab_results": [
+      {
+        "_uid": ["c73aeccf-43ea-4cc7-bb8c-82cad7dc1be4"],
+        "full_blood_count": [
+          {
+            "_uid": ["c41b1def-d3ba-401b-bb15-19359e6beb70"],
+            "test_name": ["FBC"],
+            "hb": [
+              {
+                "analyte_name": ["Hb"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 150,
+                    "|unit": "g/L"
+                  }
                 ],
-                "setting": [
-                    {
-                        "|code": "238",
-                        "|value": "other care",
-                        "|terminology": "openehr"
-                    }
-                ]
-            }
-        ],
-        "lab_results": [
-            {
-                "_uid": [
-                    "c73aeccf-43ea-4cc7-bb8c-82cad7dc1be4"
+                "reference_range_guidance": ["115 - 180"]
+              }
+            ],
+            "total_white_cell_count": [
+              {
+                "analyte_name": ["Total WBCC"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 10,
+                    "|unit": "10*9/L"
+                  }
                 ],
-                "full_blood_count": [
-                    {
-                        "_uid": [
-                            "c41b1def-d3ba-401b-bb15-19359e6beb70"
-                        ],
-                        "test_name": [
-                            "FBC"
-                        ],
-                        "hb": [
-                            {
-                                "analyte_name": [
-                                    "Hb"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 150,
-                                        "|unit": "g/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "115-180"
-                                ]
-                            }
-                        ],
-                        "total_white_cell_count": [
-                            {
-                                "analyte_name": [
-                                    "Total WBCC"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 10,
-                                        "|unit": "10*9/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "3.6-11.0"
-                                ]
-                            }
-                        ],
-                        "platelets": [
-                            {
-                                "analyte_name": [
-                                    "Platelets"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 150,
-                                        "|unit": "10*9/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "140-400"
-                                ]
-                            }
-                        ],
-                        "neutrophils": [
-                            {
-                                "analyte_name": [
-                                    "Neutrophils"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 6,
-                                        "|unit": "10*9/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "1.8-7.5"
-                                ]
-                            }
-                        ],
-                        "lymphocytes": [
-                            {
-                                "analyte_name": [
-                                    "Lymphocytes"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 4,
-                                        "|unit": "10*9/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "1.0-4.0"
-                                ]
-                            }
-                        ],
-                        "time": "2023-09-01T12:00:00.000Z",
-                        "language": [
-                            {
-                                "|code": "en",
-                                "|terminology": "ISO_639-1"
-                            }
-                        ],
-                        "encoding": [
-                            {
-                                "|code": "UTF-8",
-                                "|terminology": "IANA_character-sets"
-                            }
-                        ]
-                    }
+                "reference_range_guidance": ["3.6 - 11.0"]
+              }
+            ],
+            "platelets": [
+              {
+                "analyte_name": ["Platelets"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 150,
+                    "|unit": "10*9/L"
+                  }
                 ],
-                "liver_function_tests": [
-                    {
-                        "_uid": [
-                            "ab2d35a7-8d91-4b64-992f-c723aeb02481"
-                        ],
-                        "test_name": [
-                            "Liver Function Test"
-                        ],
-                        "ast": [
-                            {
-                                "analyte_name": [
-                                    "AST"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 26,
-                                        "|unit": "u/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "1-45"
-                                ]
-                            }
-                        ],
-                        "alt": [
-                            {
-                                "analyte_name": [
-                                    "ALT"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 50,
-                                        "|unit": "u/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "<41"
-                                ]
-                            }
-                        ],
-                        "time": "2023-09-01T12:00:00.000Z",
-                        "language": [
-                            {
-                                "|code": "en",
-                                "|terminology": "ISO_639-1"
-                            }
-                        ],
-                        "encoding": [
-                            {
-                                "|code": "UTF-8",
-                                "|terminology": "IANA_character-sets"
-                            }
-                        ]
-                    }
+                "reference_range_guidance": ["140 - 400"]
+              }
+            ],
+            "neutrophils": [
+              {
+                "analyte_name": ["Neutrophils"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 6,
+                    "|unit": "10*9/L"
+                  }
                 ],
-                "urea_and_electrolytes": [
-                    {
-                        "_uid": [
-                            "a34b9e2e-cadf-4c9e-8715-24f137dbdb36"
-                        ],
-                        "test_name": [
-                            "Urea and electrolytes"
-                        ],
-                        "creatinine": [
-                            {
-                                "analyte_name": [
-                                    {
-                                        "|code": "113075003",
-                                        "|value": "Creatinine measurement",
-                                        "|terminology": "SNOMED-CT"
-                                    }
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 90,
-                                        "|unit": "umol/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "45-104"
-                                ]
-                            }
-                        ],
-                        "sodium": [
-                            {
-                                "analyte_name": [
-                                    {
-                                        "|code": "1020681000000107",
-                                        "|value": "Sodium level",
-                                        "|terminology": "SNOMED-CT"
-                                    }
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 140,
-                                        "|unit": "mmol/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "136 - 145"
-                                ]
-                            }
-                        ],
-                        "potassium": [
-                            {
-                                "analyte_name": [
-                                    "Potassium"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 4,
-                                        "|unit": "mmol/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "Reference range guidance 13"
-                                ]
-                            }
-                        ],
-                        "urea": [
-                            {
-                                "analyte_name": [
-                                    "Urea"
-                                ],
-                                "analyte_result": [
-                                    {
-                                        "|magnitude": 6,
-                                        "|unit": "mmol/L"
-                                    }
-                                ],
-                                "reference_range_guidance": [
-                                    "Reference range guidance 32"
-                                ]
-                            }
-                        ],
-                        "time": "2023-09-01T12:00:00.000Z",
-                        "language": [
-                            {
-                                "|code": "en",
-                                "|terminology": "ISO_639-1"
-                            }
-                        ],
-                        "encoding": [
-                            {
-                                "|code": "UTF-8",
-                                "|terminology": "IANA_character-sets"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "prescription": [
-            {
-                "_uid": [
-                    "fd474084-ee79-4272-bd54-99f6d2b779c1"
+                "reference_range_guidance": ["1.8 - 7.5"]
+              }
+            ],
+            "lymphocytes": [
+              {
+                "analyte_name": ["Lymphocytes"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 4,
+                    "|unit": "10*9/L"
+                  }
                 ],
-                "medication_use_statement": [
-                    {
-                        "_uid": [
-                            "b763b73b-5516-4f61-9061-12846d6e6344"
-                        ],
-                        "medication_name": [
-                            "Methotrexate"
-                        ],
-                        "overall_directions_description": "10mg once weekly",
-                        "route_of_administration": [
-                            "Oral"
-                        ],
-                        "clinical_indication": [
-                            {
-                                "|code": "SNOMED-CT",
-                                "|value": "128473001",
-                                "|terminology": "Uveitis"
-                            }
-                        ],
-                        "time": "2023-09-01T12:00:00.000Z",
-                        "language": [
-                            {
-                                "|code": "en",
-                                "|terminology": "ISO_639-1"
-                            }
-                        ],
-                        "encoding": [
-                            {
-                                "|code": "UTF-8",
-                                "|terminology": "IANA_character-sets"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "body_weight": [
-            {
-                "_uid": [
-                    "17bf0119-7a32-4d97-84f2-fe613c053055"
-                ],
-                "weight": [
-                    {
-                        "|magnitude": 75.07,
-                        "|unit": "kg"
-                    }
-                ],
-                "time": "2023-09-01T12:00:00.000Z",
-                "language": [
-                    {
-                        "|code": "en",
-                        "|terminology": "ISO_639-1"
-                    }
-                ],
-                "encoding": [
-                    {
-                        "|code": "UTF-8",
-                        "|terminology": "IANA_character-sets"
-                    }
-                ]
-            }
-        ],
-        "height_length": [
-            {
-                "_uid": [
-                    "76f13a3a-b24b-4635-abf5-6d1ea99738cc"
-                ],
-                "height_length": [
-                    {
-                        "|magnitude": 173,
-                        "|unit": "cm"
-                    }
-                ],
-                "time": "2023-09-01T12:00:00.000Z",
-                "language": [
-                    {
-                        "|code": "en",
-                        "|terminology": "ISO_639-1"
-                    }
-                ],
-                "encoding": [
-                    {
-                        "|code": "UTF-8",
-                        "|terminology": "IANA_character-sets"
-                    }
-                ]
-            }
-        ],
-        "ethnic_identity": [
-            {
-                "_uid": [
-                    "95b4f5bc-379e-4182-b07c-fa111bc3ede6"
-                ],
-                "ethnicity": [
-                    "Asian or Asian British - Indian"
-                ],
-                "language": [
-                    {
-                        "|code": "en",
-                        "|terminology": "ISO_639-1"
-                    }
-                ],
-                "encoding": [
-                    {
-                        "|code": "UTF-8",
-                        "|terminology": "IANA_character-sets"
-                    }
-                ]
-            }
-        ],
-        "category": [
-            {
-                "|code": "433",
-                "|value": "event",
-                "|terminology": "openehr"
-            }
-        ],
-        "language": [
-            {
+                "reference_range_guidance": ["1.0 - 4.0"]
+              }
+            ],
+            "time": "2023-09-01T12:00:00.000Z",
+            "language": [
+              {
                 "|code": "en",
                 "|terminology": "ISO_639-1"
-            }
+              }
+            ],
+            "encoding": [
+              {
+                "|code": "UTF-8",
+                "|terminology": "IANA_character-sets"
+              }
+            ]
+          }
         ],
-        "territory": [
-            {
-                "|code": "GB",
-                "|terminology": "ISO_3166-1"
-            }
+        "liver_function_tests": [
+          {
+            "_uid": ["ab2d35a7-8d91-4b64-992f-c723aeb02481"],
+            "test_name": ["Liver Function Test"],
+            "ast": [
+              {
+                "analyte_name": ["AST"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 26,
+                    "|unit": "u/L"
+                  }
+                ],
+                "reference_range_guidance": ["1 - 45"]
+              }
+            ],
+            "alt": [
+              {
+                "analyte_name": ["ALT"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 50,
+                    "|unit": "u/L"
+                  }
+                ],
+                "reference_range_guidance": ["<41"]
+              }
+            ],
+            "time": "2023-09-01T12:00:00.000Z",
+            "language": [
+              {
+                "|code": "en",
+                "|terminology": "ISO_639-1"
+              }
+            ],
+            "encoding": [
+              {
+                "|code": "UTF-8",
+                "|terminology": "IANA_character-sets"
+              }
+            ]
+          }
+        ],
+        "urea_and_electrolytes": [
+          {
+            "_uid": ["a34b9e2e-cadf-4c9e-8715-24f137dbdb36"],
+            "test_name": ["Urea and electrolytes"],
+            "creatinine": [
+              {
+                "analyte_name": [
+                  {
+                    "|code": "113075003",
+                    "|value": "Creatinine measurement",
+                    "|terminology": "SNOMED-CT"
+                  }
+                ],
+                "analyte_result": [
+                  {
+                    "|magnitude": 90,
+                    "|unit": "umol/L"
+                  }
+                ],
+                "reference_range_guidance": ["45 - 104"]
+              }
+            ],
+            "sodium": [
+              {
+                "analyte_name": [
+                  {
+                    "|code": "1020681000000107",
+                    "|value": "Sodium level",
+                    "|terminology": "SNOMED-CT"
+                  }
+                ],
+                "analyte_result": [
+                  {
+                    "|magnitude": 140,
+                    "|unit": "mmol/L"
+                  }
+                ],
+                "reference_range_guidance": ["136 - 145"]
+              }
+            ],
+            "potassium": [
+              {
+                "analyte_name": ["Potassium"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 4,
+                    "|unit": "mmol/L"
+                  }
+                ],
+                "reference_range_guidance": ["Reference range guidance 13"]
+              }
+            ],
+            "urea": [
+              {
+                "analyte_name": ["Urea"],
+                "analyte_result": [
+                  {
+                    "|magnitude": 6,
+                    "|unit": "mmol/L"
+                  }
+                ],
+                "reference_range_guidance": ["Reference range guidance 32"]
+              }
+            ],
+            "time": "2023-09-01T12:00:00.000Z",
+            "language": [
+              {
+                "|code": "en",
+                "|terminology": "ISO_639-1"
+              }
+            ],
+            "encoding": [
+              {
+                "|code": "UTF-8",
+                "|terminology": "IANA_character-sets"
+              }
+            ]
+          }
         ]
-    }
+      }
+    ],
+    "prescription": [
+      {
+        "_uid": ["fd474084-ee79-4272-bd54-99f6d2b779c1"],
+        "medication_use_statement": [
+          {
+            "_uid": ["b763b73b-5516-4f61-9061-12846d6e6344"],
+            "medication_name": ["Methotrexate"],
+            "overall_directions_description": "10mg once weekly",
+            "route_of_administration": ["Oral"],
+            "clinical_indication": [
+              {
+                "|code": "SNOMED-CT",
+                "|value": "128473001",
+                "|terminology": "Uveitis"
+              }
+            ],
+            "time": "2023-09-01T12:00:00.000Z",
+            "language": [
+              {
+                "|code": "en",
+                "|terminology": "ISO_639-1"
+              }
+            ],
+            "encoding": [
+              {
+                "|code": "UTF-8",
+                "|terminology": "IANA_character-sets"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "body_weight": [
+      {
+        "_uid": ["17bf0119-7a32-4d97-84f2-fe613c053055"],
+        "weight": [
+          {
+            "|magnitude": 75.07,
+            "|unit": "kg"
+          }
+        ],
+        "time": "2023-09-01T12:00:00.000Z",
+        "language": [
+          {
+            "|code": "en",
+            "|terminology": "ISO_639-1"
+          }
+        ],
+        "encoding": [
+          {
+            "|code": "UTF-8",
+            "|terminology": "IANA_character-sets"
+          }
+        ]
+      }
+    ],
+    "height_length": [
+      {
+        "_uid": ["76f13a3a-b24b-4635-abf5-6d1ea99738cc"],
+        "height_length": [
+          {
+            "|magnitude": 173,
+            "|unit": "cm"
+          }
+        ],
+        "time": "2023-09-01T12:00:00.000Z",
+        "language": [
+          {
+            "|code": "en",
+            "|terminology": "ISO_639-1"
+          }
+        ],
+        "encoding": [
+          {
+            "|code": "UTF-8",
+            "|terminology": "IANA_character-sets"
+          }
+        ]
+      }
+    ],
+    "ethnic_identity": [
+      {
+        "_uid": ["95b4f5bc-379e-4182-b07c-fa111bc3ede6"],
+        "ethnicity": ["Asian or Asian British - Indian"],
+        "language": [
+          {
+            "|code": "en",
+            "|terminology": "ISO_639-1"
+          }
+        ],
+        "encoding": [
+          {
+            "|code": "UTF-8",
+            "|terminology": "IANA_character-sets"
+          }
+        ]
+      }
+    ],
+    "category": [
+      {
+        "|code": "433",
+        "|value": "event",
+        "|terminology": "openehr"
+      }
+    ],
+    "language": [
+      {
+        "|code": "en",
+        "|terminology": "ISO_639-1"
+      }
+    ],
+    "territory": [
+      {
+        "|code": "GB",
+        "|terminology": "ISO_3166-1"
+      }
+    ]
+  }
 }

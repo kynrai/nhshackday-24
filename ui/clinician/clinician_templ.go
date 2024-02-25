@@ -203,7 +203,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var8 string
-		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 161, Col: 132}
 		}
@@ -239,7 +239,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var10 string
-		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 168, Col: 149}
 		}
@@ -275,7 +275,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var12 string
-		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 175, Col: 141}
 		}
@@ -311,7 +311,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var14 string
-		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 182, Col: 141}
 		}
@@ -347,7 +347,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var16 string
-		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 189, Col: 139}
 		}
@@ -391,7 +391,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var18 string
-		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 197, Col: 137}
 		}
@@ -427,7 +427,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var20 string
-		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 204, Col: 137}
 		}
@@ -471,7 +471,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var22 string
-		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 212, Col: 145}
 		}
@@ -507,7 +507,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var24 string
-		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 219, Col: 141}
 		}
@@ -543,7 +543,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var26 string
-		templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 226, Col: 144}
 		}
@@ -579,7 +579,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var28 string
-		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 233, Col: 139}
 		}
