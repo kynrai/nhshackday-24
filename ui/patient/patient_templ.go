@@ -117,7 +117,7 @@ func PatientMedicationPage(results model.Prescription) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium\">My Medications</div><div class=\"w-40 h-40 rounded-full bg-gray-300 p-8\"><img src=\"/assets/img/pill.svg\"></div><div class=\"flex items-center justify-center px-4 py-1 rounded-full bg-gray-200 w-full tracking-wide font-medium\">Methotrexate</div><div class=\"flex flex-col gap-2 w-full\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center\"><div class=\"text-white font-medium text-center\">My Medications</div></div><div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium\">My Medications</div><div class=\"w-40 h-40 rounded-full bg-gray-300 p-8\"><img src=\"/assets/img/pill.svg\"></div><div class=\"flex items-center justify-center px-4 py-1 rounded-full bg-gray-200 w-full tracking-wide font-medium\">Methotrexate</div><div class=\"flex flex-col gap-2 w-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -175,7 +175,7 @@ func PatientMedicationRow(k, v string) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(k)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 69, Col: 6}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 72, Col: 6}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -188,7 +188,7 @@ func PatientMedicationRow(k, v string) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(v)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 72, Col: 6}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 75, Col: 6}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
