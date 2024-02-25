@@ -125,5 +125,5 @@ func (s *Server) handleSMSAlert(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleAlert(w http.ResponseWriter, r *http.Request) {
-	ui.Index(patient.Alert()).Render(r.Context(), w)
+	patient.Alert().Render(r.Context(), w)
 }

@@ -38,7 +38,7 @@ func (s *Server) handleSSEConnect(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 	<-r.Context().Done()
-	fmt.Println("Client disconnected")
+	fmt.Printf("Client disconnected: %v\n", r.Context().Err())
 
 	// Simulate sending data periodically
 	// for {
