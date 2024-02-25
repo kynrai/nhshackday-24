@@ -15,9 +15,9 @@ module.exports = {
         "nhs-grey-3": "#425563",
         "nhs-green-2": "#009639",
         "nhs-purple-2": "#330072",
+        "nhs-yellow-1": "##fff9c4",
       },
     },
   },
   plugins: [],
-}
-
+};
