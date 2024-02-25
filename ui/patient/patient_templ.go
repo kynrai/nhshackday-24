@@ -183,3 +183,27 @@ func PatientMedicationRow(k, v string) templ.Component {
 		return templ_7745c5c3_Err
 	})
 }
+
+func Alert() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var7 == nil {
+			templ_7745c5c3_Var7 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"bg-rose-300 w-screen h-screen\"><div class=\"flex flex-col h-screen justify-center items-center\"><img class=\"h-40 m-8\" src=\"/assets/img/warning-sign.svg\"><p class=\"text-center font-bold text-4xl mb-2\">ALERT</p><p class=\"text-center mb-4\">Your recent blood test results have come back <span class=\"font-bold\">abnormal</span></p><p class=\"text-center\"><span class=\"font-bold\">DO</span> <span class=\"font-bold underline text-red-600\">NOT</span> take the next dose of Methotrexate.</p><p class=\"text-center mb-4\">Contact your doctor of pharmacy immediately for further information</p><div><button class=\"flex items-center justify-center gap-1 bg-gray-100 rounded-2xl border-2 border-black px-4 py-2\"><img class=\"h-6\" src=\"/assets/img/phone.svg\"><div class=\"text-2xl font-bold\">Call GP</div></button></div></div></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return templ_7745c5c3_Err
+	})
+}

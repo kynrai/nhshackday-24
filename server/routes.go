@@ -33,4 +33,5 @@ func (s *Server) Routes() {
 		r.Get("/sms-reminder", s.handleSMSReminder)
 		r.Get("/sms-alert", s.handleSMSAlert)
 	})
+	s.r.Get("/alert", s.handleAlert)
 }
