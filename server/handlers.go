@@ -60,21 +60,24 @@ func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	labs := s.reports
 	w.Header().Set("Content-Type", "text/html")
-	ui.Index(clinician.ClinicianView(tabType, *data)).Render(r.Context(), w)
+	ui.Index(clinician.ClinicianView(tabType, *data, labs)).Render(r.Context(), w)
 }
 
 func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
-	// data, err := s.ian.Read()
-	// tabType := "prescription"
-
-	// if err != nil {
-	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-	// 	return
-	// }
+	tabType := chi.URLParam(r, "type")
+	if tabType == "" {
+		tabType = "medication"
+	}
+	data, err := s.ian.Read()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	w.Header().Set("Content-Type", "text/html")
-	patient.PatientIndex().Render(r.Context(), w)
+	patient.PatientIndex(patient.PatientView(tabType, *data)).Render(r.Context(), w)
 }
 
 func (s *Server) handlePageIndex(w http.ResponseWriter, r *http.Request) {
@@ -92,8 +95,9 @@ func (s *Server) handleNav(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	labs := s.reports
 	w.Header().Set("Content-Type", "text/html")
-	clinician.ClinicianView(tabType, *data).Render(r.Context(), w)
+	clinician.ClinicianView(tabType, *data, labs).Render(r.Context(), w)
 }
 
 func (s *Server) handleSMSReminder(w http.ResponseWriter, r *http.Request) {

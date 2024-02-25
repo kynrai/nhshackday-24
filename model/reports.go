@@ -12,7 +12,7 @@ var reports embed.FS
 
 func MtxReports() []SingleMtxReport {
 	rs := []SingleMtxReport{}
-	for i := range 9 {
+	for i := 0; i <= 9; i++ {
 		b, err := reports.ReadFile(fmt.Sprintf("reports/week_%d_report.json", i))
 		if err != nil {
 			log.Fatal(err)
