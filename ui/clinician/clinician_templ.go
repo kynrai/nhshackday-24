@@ -13,6 +13,7 @@ import "bytes"
 import (
 	"fmt"
 	"github.com/kynrai/nhshackday-24/model"
+	"strconv"
 	"strings"
 )
 
@@ -179,7 +180,7 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(lab.MtxReport.Context[0].StartTime[0].Format("1/2/06"))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 158, Col: 114}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 159, Col: 114}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -203,9 +204,9 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var8 string
-		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0])
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 166, Col: 132}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 167, Col: 132}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -216,16 +217,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var9 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var9...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var9 string
-			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 168, Col: 146}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var9).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var10 string
+			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 169, Col: 351}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -238,12 +252,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var10 string
-		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var11 string
+		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 173, Col: 149}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 174, Col: 149}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -252,16 +266,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var12 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var12...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var11 string
-			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 175, Col: 163}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var12).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var13 string
+			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 176, Col: 402}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -274,12 +301,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var12 string
-		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var14 string
+		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 180, Col: 141}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 181, Col: 141}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -288,16 +315,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var15 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var15...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var13 string
-			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 182, Col: 155}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var15).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var16 string
+			templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 183, Col: 378}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -310,12 +350,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var14 string
-		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var17 string
+		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 187, Col: 141}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 188, Col: 141}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -324,16 +364,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var18 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var18...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var15 string
-			templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 189, Col: 155}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var18).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var19 string
+			templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 190, Col: 378}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -346,12 +399,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var16 string
-		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var20 string
+		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 194, Col: 139}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 195, Col: 139}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -360,16 +413,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var21 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var21...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var17 string
-			templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 196, Col: 153}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var21).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var22 string
+			templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 197, Col: 372}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -390,12 +456,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var18 string
-		templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var23 string
+		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 202, Col: 137}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 203, Col: 137}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var23))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -404,16 +470,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var24 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var24...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var19 string
-			templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 204, Col: 151}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var24).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var25 string
+			templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 205, Col: 366}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -426,12 +505,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var20 string
-		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var26 string
+		templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 209, Col: 137}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 210, Col: 137}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var26))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -440,16 +519,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var27 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var27...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var21 string
-			templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 211, Col: 151}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var21))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var27).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var28 string
+			templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 212, Col: 366}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -470,12 +562,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var22 string
-		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var29 string
+		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 217, Col: 145}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 218, Col: 145}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -484,16 +576,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var30 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var30...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var23 string
-			templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 219, Col: 159}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var23))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var30).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var31 string
+			templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 220, Col: 390}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -506,12 +611,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var24 string
-		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var32 string
+		templ_7745c5c3_Var32, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 224, Col: 141}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 225, Col: 141}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var24))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var32))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -520,16 +625,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var33 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var33...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var25 string
-			templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 226, Col: 155}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var33).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var34 string
+			templ_7745c5c3_Var34, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 227, Col: 378}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var34))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -542,12 +660,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var26 string
-		templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var35 string
+		templ_7745c5c3_Var35, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 231, Col: 144}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 232, Col: 144}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var26))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var35))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -556,16 +674,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var36 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var36...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var27 string
-			templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 233, Col: 158}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var27))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var36).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var37 string
+			templ_7745c5c3_Var37, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 234, Col: 387}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var37))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -578,12 +709,12 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var28 string
-		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0])
+		var templ_7745c5c3_Var38 string
+		templ_7745c5c3_Var38, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 238, Col: 139}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 239, Col: 139}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var38))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -592,16 +723,29 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 			return templ_7745c5c3_Err
 		}
 		for i := 0; i <= 9; i++ {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"p-2 border border-zinc-400 w-1/6\">")
+			var templ_7745c5c3_Var39 = []any{"p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200", IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0], labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude))}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var39...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var29 string
-			templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<td class=\"")
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 240, Col: 153}
+				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var39).String()))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var40 string
+			templ_7745c5c3_Var40, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 241, Col: 372}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var40))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -621,10 +765,15 @@ func TestTable(results model.LabResults, labs []model.SingleMtxReport) templ.Com
 	})
 }
 
-func DateConverter(s string) string {
-	date := s[:10]
-	split := strings.Split(date, "-")
-	return fmt.Sprintf("%v/%v/%v", split[2], split[1], split[0])
+func IsAbnormal(s string, result float64) bool {
+	if s == "<41" {
+		return result > 41
+	} else {
+		refRange := strings.Split(s, " - ")
+		low, _ := strconv.ParseFloat(refRange[0], 64)
+		high, _ := strconv.ParseFloat(refRange[1], 64)
+		return result < low || result > high
+	}
 }
 
 func TestSection(title string) templ.Component {
@@ -635,21 +784,21 @@ func TestSection(title string) templ.Component {
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var30 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var30 == nil {
-			templ_7745c5c3_Var30 = templ.NopComponent
+		templ_7745c5c3_Var41 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var41 == nil {
+			templ_7745c5c3_Var41 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr class=\"p-2 font-medium bg-zinc-200\"><td class=\"p-2 w-1/6 text-zinc-600 border border-zinc-400\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var31 string
-		templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(title)
+		var templ_7745c5c3_Var42 string
+		templ_7745c5c3_Var42, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 255, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/clinician/clinician.templ`, Line: 261, Col: 68}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var42))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

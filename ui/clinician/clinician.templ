@@ -4,6 +4,7 @@ import (
 	"github.com/kynrai/nhshackday-24/model"
 	"fmt"
 	"strings"
+	"strconv"
 )
 
 templ ClinicianView(tabType string, data model.Data, labs []model.SingleMtxReport) {
@@ -164,91 +165,96 @@ templ TestTable(results model.LabResults, labs []model.SingleMtxReport) {
 			@TestSection("Full Blood Count")
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">Hemoglobin (g/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">White blood cell (10*9/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">Lymphocyte (10*9/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">Neutrophils (10*9/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">Platelet (10*9/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			@TestSection("Liver Function Test")
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">AST (u/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">ALT (u/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			@TestSection("Urea & Electrolytes")
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">Creatinine (umol/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">Sodium (mmol/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">Potassium (mmol/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 			<tr class="align-top">
 				<td class="p-2 font-medium border border-zinc-400">Urea (mmol/L)</td>
-				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0] }</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0] }</td>
 				for i := 0; i <= 9; i++ {
-					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude) } </td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0],labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude) } </td>
 				}
 			</tr>
 		</tbody>
 	</table>
 }
 
-func DateConverter(s string) string {
-	date := s[:10]
-	split := strings.Split(date, "-")
-	return fmt.Sprintf("%v/%v/%v", split[2], split[1], split[0])
+func IsAbnormal(s string, result float64) bool {
+	if s == "<41" {
+		return result > 41
+	} else {
+		refRange := strings.Split(s, " - ")
+		low, _ := strconv.ParseFloat(refRange[0], 64)
+		high, _ := strconv.ParseFloat(refRange[1], 64)
+		return result < low || result > high
+	}
 }
 
 templ TestSection(title string) {
