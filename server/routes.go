@@ -32,6 +32,8 @@ func (s *Server) Routes() {
 	})
 
 	s.r.HandleFunc("/notify", s.handleNofityConnect)
+	s.r.HandleFunc("/notifyack", s.handleNofityAckConnect)
+
 	s.r.Post("/app-alert", s.handleSendAlert)
 	s.r.Post("/app-reminder", s.handleSendAppointment)
 }

@@ -1,8 +1,10 @@
 package server
 
 import (
+	"bytes"
 	_ "embed"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -93,6 +95,12 @@ func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
 	}
 	labs := s.reports
 
+	if r.URL.Query().Get("ack") == "true" {
+		fmt.Println("ack")
+		buf := new(bytes.Buffer)
+		clinician.Ack().Render(r.Context(), buf)
+		s.notifyAckMsg <- fmt.Sprintf("event: ack\ndata: %s", buf.String())
+	}
 	w.Header().Set("Content-Type", "text/html")
 	patient.PatientIndex(patient.PatientView(tabType, *data, labs)).Render(r.Context(), w)
 }

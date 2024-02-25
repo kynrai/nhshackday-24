@@ -7,6 +7,10 @@ import (
 	"strconv"
 )
 
+templ Ack() {
+	<div id="patient-acknowledge" class="px-4 py-2 bg-gray-200 fixed bottom-10 rounded-lg">Patient has acknowledged alert.</div>
+}
+
 templ ClinicianView(tabType string, data model.Data, labs []model.SingleMtxReport) {
 	<div id="clinician" class="flex h-full">
 		<div class="relative w-[25%] border-r border-gray-400 pr-10 flex flex-col gap-4 items-stretch h-full">
@@ -41,7 +45,7 @@ templ ClinicianView(tabType string, data model.Data, labs []model.SingleMtxRepor
 					<div>White</div>
 				</div>
 			</div>
-			<div id="patient-acknowledge" class="px-4 py-2 bg-gray-200 fixed bottom-10 rounded-lg">Patient has acknowledged alert.</div>
+			<div hx-ext="sse" sse-connect="/notifyack" sse-swap="message"></div>
 		</div>
 		<div id="tab" class="flex flex-col w-[85%]">
 			<nav class="h-10 w-full border-b border-gray-400">
