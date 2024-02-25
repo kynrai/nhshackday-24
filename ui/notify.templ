@@ -1,37 +1,12 @@
 package ui
 
-templ Connections(addrs []string) {
-	<div class="flex flex-col">
-		<p>Connections</p>
-		for _, addr := range addrs {
-			<form class="flex">
-				<input type="text" name="addr" value={ addr }/>
-				<label>
-					{ addr }
-					<button
-						hx-post="/notify"
-						hx-swap="none"
-					>Notify</button>
-				</label>
-			</form>
-		}
+templ SSE() {
+	<h1>SSE Example with HTMX</h1>
+	<div hx-ext="sse" sse-connect="/events" sse-swap="message">
+		Contents of this box will be updated in real time with every SSE message received from the chatroom.
 	</div>
-}
-
-templ Message(msg string) {
-	<div id="notifications" hx-swap-oob="beforeend">
-		{ msg }
-	</div>
-}
-
-templ Notifications() {
-	<p>Notifications</p>
-	<div
-		class=""
-		hx-ext="ws"
-		ws-connect="/ws"
-		hx-ext="ignore:morph"
-	>
-		<div id="notifications"></div>
-	</div>
+	<button
+		hx-post="/notify"
+		hx-swap="none"
+	>Send Message</button>
 }
