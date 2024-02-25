@@ -37,7 +37,7 @@
                                 ],
                                 "analyte_result": [
                                     {
-                                        "|magnitude": 15,
+                                        "|magnitude": 150,
                                         "|unit": "g/L"
                                     }
                                 ],
@@ -224,7 +224,7 @@
                                     }
                                 ],
                                 "reference_range_guidance": [
-                                    "Reference range guidance 70"
+                                    "136 - 145"
                                 ]
                             }
                         ],
@@ -240,7 +240,7 @@
                                     }
                                 ],
                                 "reference_range_guidance": [
-                                    "Reference range guidance 13"
+                                    "3.5 - 5.5"
                                 ]
                             }
                         ],
@@ -256,7 +256,7 @@
                                     }
                                 ],
                                 "reference_range_guidance": [
-                                    "Reference range guidance 32"
+                                    "6 - 12"
                                 ]
                             }
                         ],
