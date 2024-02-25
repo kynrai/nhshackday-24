@@ -1,11 +1,12 @@
 package server
 
 import (
+	"bytes"
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/kynrai/nhshackday-24/ui"
+	"github.com/kynrai/nhshackday-24/ui/patient"
 )
 
 func (s *Server) handlePageSSE(w http.ResponseWriter, r *http.Request) {
@@ -48,5 +49,8 @@ func (s *Server) handleSSEConnect(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleNotify(w http.ResponseWriter, r *http.Request) {
-	s.msgChan <- fmt.Sprintf("<div>%s: Msg from server</div>", time.Now().Format(time.TimeOnly))
+	buf := new(bytes.Buffer)
+	patient.Alert().Render(r.Context(), buf)
+	s.msgChan <- buf.String()
+	// s.msgChan <- fmt.Sprintf("data: %s\n\n", buf.String())
 }
