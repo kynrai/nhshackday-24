@@ -5,7 +5,7 @@ templ PatientNav(tabType string) {
 		<div
 			hx-get={ "/hx/patient-nav/" + "profile" }
 			hx-target="#patient"
-			hx-swap="morph:outerHTML"
+			hx-swap="morph:outerHTML show:top"
 			class={ "w-1/3 flex flex-col tracking-tight justify-center items-center px-4 py-2 leading-snug", templ.KV("border-t-2 border-gray-400",tabType =="profile") }
 		>
 			<svg class="w-6 h-6 stroke-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -16,7 +16,7 @@ templ PatientNav(tabType string) {
 		<div
 			hx-get={ "/hx/patient-nav/" + "lab" }
 			hx-target="#patient"
-			hx-swap="morph:outerHTML"
+			hx-swap="morph:outerHTML show:top"
 			class={ "w-1/3 flex flex-col tracking-tight justify-center items-center px-4 py-2 leading-snug", templ.KV("border-t-2 border-gray-400",tabType =="lab") }
 		>
 			<svg class="w-6 h-6 stroke-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -27,7 +27,7 @@ templ PatientNav(tabType string) {
 		<div
 			hx-get={ "/hx/patient-nav/" + "records" }
 			hx-target="#patient"
-			hx-swap="morph:outerHTML"
+			hx-swap="morph:outerHTML show:top"
 			class={ "w-1/3 flex flex-col tracking-tight justify-center items-center px-4 py-2 leading-snug", templ.KV("border-t-2 border-gray-400",tabType =="records") }
 		>
 			<svg class="w-6 h-6 stroke-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
