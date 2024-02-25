@@ -620,8 +620,8 @@ video {
   width: 1.5rem;
 }
 
-.w-\[15\%\]{
-  width: 15%;
+.w-\[25\%\]{
+  width: 25%;
 }
 
 .w-\[85\%\]{
@@ -657,6 +657,10 @@ video {
   align-items: center;
 }
 
+.items-stretch{
+  align-items: stretch;
+}
+
 .justify-end{
   justify-content: flex-end;
 }
@@ -685,6 +689,10 @@ video {
   border-radius: 0.5rem;
 }
 
+.rounded-md{
+  border-radius: 0.375rem;
+}
+
 .rounded-tl{
   border-top-left-radius: 0.25rem;
 }
@@ -697,8 +705,8 @@ video {
   border-width: 1px;
 }
 
-.border-2{
-  border-width: 2px;
+.border-\[1px\]{
+  border-width: 1px;
 }
 
 .border-y{
@@ -708,6 +716,18 @@ video {
 
 .border-b{
   border-bottom-width: 1px;
+}
+
+.border-b-2{
+  border-bottom-width: 2px;
+}
+
+.border-b-4{
+  border-bottom-width: 4px;
+}
+
+.border-b-\[4px\]{
+  border-bottom-width: 4px;
 }
 
 .border-r{
@@ -721,6 +741,16 @@ video {
 .border-gray-400{
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
+}
+
+.border-nhs-grey-2{
+  --tw-border-opacity: 1;
+  border-color: rgb(118 134 146 / var(--tw-border-opacity));
+}
+
+.border-nhs-purple-2{
+  --tw-border-opacity: 1;
+  border-color: rgb(51 0 114 / var(--tw-border-opacity));
 }
 
 .border-red-500{
@@ -743,9 +773,14 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-.bg-green-400{
+.bg-nhs-blue-1{
   --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+  background-color: rgb(0 114 206 / var(--tw-bg-opacity));
+}
+
+.bg-nhs-green-2{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 150 57 / var(--tw-bg-opacity));
 }
 
 .bg-white{
@@ -775,9 +810,18 @@ video {
   padding: 1rem;
 }
 
+.p-6{
+  padding: 1.5rem;
+}
+
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.px-7{
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
 }
 
 .py-2{
@@ -813,10 +857,6 @@ video {
   line-height: 1.25rem;
 }
 
-.font-bold{
-  font-weight: 700;
-}
-
 .font-medium{
   font-weight: 500;
 }
@@ -845,6 +885,11 @@ video {
 .text-red-500{
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .text-zinc-600{

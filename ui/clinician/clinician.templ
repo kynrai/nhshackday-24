@@ -7,12 +7,12 @@ import (
 
 templ ClinicianView(tabType string, data model.Data) {
 	<div id="clinician" class="flex h-screen">
-		<div class="w-[15%] h-screen border-r border-gray-400 pr-10">
+		<div class="w-[25%] h-screen border-r border-gray-400 pr-10 flex flex-col gap-4 items-stretch">
 			<button
-				class="px-4 py-2 rounded-lg w-fit bg-green-400"
+				class="px-4 py-2 rounded-md bg-nhs-green-2 text-white border-b-2 border-b-white"
 				type="button"
 			>Back to Patients</button>
-			<div class="flex flex-col gap-2">
+			<div class="flex flex-col gap-2 border-[1px] border-b-[4px] border-nhs-grey-2 p-6">
 				<div class="text-lg font-semibold">Patient Profile</div>
 				<div class="flex justify-between">
 					<div class="font-medium">Name: </div>
@@ -89,18 +89,18 @@ templ ClinicianView(tabType string, data model.Data) {
 }
 
 templ PrescriptionTable(results model.Prescription) {
-	<div class="flex flex-col border-2 border-red-500 w-full mb-6 p-4 gap-2">
+	<div class="flex flex-col border-[1px] border-b-4 border-nhs-purple-2 w-full mb-6 p-4 gap-2">
 		<div>
-			Patient's next blood test for <span class="text-red-500">Methotrexate</span> is due on <span class="text-red-500">27/3/24</span>. Send a reminder to the patient to book an appointment?
+			Patient's next blood test for <span class="font-medium">Methotrexate</span> is due on <span class="text-red-500 font-medium">27/3/24</span>. Send a reminder to the patient to book an appointment?
 		</div>
 		<div class="flex gap-4">
 			<button
 				hx-get="/hx/sms-reminder"
 				hx-swap="none"
-				class="px-4 py-2 rounded-lg w-fit bg-green-400"
+				class="px-4 py-2 rounded-md w-fit bg-nhs-green-2 text-white border-b-2 border-b-white"
 				type="button"
 			>Send SMS</button>
-			<button class="px-4 py-2 rounded-lg w-fit bg-green-400" type="button">Send via App</button>
+			<button class="px-4 py-2 rounded-md w-fit bg-nhs-green-2 text-white border-b-2 border-b-white" type="button">Send via App</button>
 		</div>
 	</div>
 	<table class="table-fixed w-full mt-1 text-sm rounded-lg">
@@ -130,7 +130,7 @@ templ PrescriptionTable(results model.Prescription) {
 }
 
 templ TestTable(results model.LabResults) {
-	<div class="flex flex-col border-2 border-red-500 w-full mb-6 p-4 gap-2">
+	<div class="flex flex-col border-[1px] border-b-4 border-red-500 w-full mb-6 p-4 gap-2">
 		<div>
 			Patient's blood test results are not within the normal range. Send an alert to the patient to stop taking the medication immediately.
 		</div>
@@ -138,10 +138,10 @@ templ TestTable(results model.LabResults) {
 			<button
 				hx-get="/hx/sms-alert"
 				hx-swap="none"
-				class="px-4 py-2 rounded-lg w-fit bg-green-400"
+				class="px-4 py-2 rounded-md w-fit bg-nhs-green-2 text-white border-b-2 border-b-white"
 				type="button"
 			>Send SMS</button>
-			<button class="px-4 py-2 rounded-lg w-fit bg-green-400" type="button">Send via App</button>
+			<button class="px-4 py-2 rounded-md w-fit bg-nhs-green-2 text-white border-b-2 border-b-white" type="button">Send via App</button>
 		</div>
 	</div>
 	<table class="table-fixed w-full mt-1 text-sm rounded-lg">
