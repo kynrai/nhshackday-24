@@ -38,7 +38,7 @@ templ PatientProfilePage(data model.SingleMtxReport) {
 			@PatientMedicationRow("Gender", "M")
 			@PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+" "+data.MtxReport.BodyWeight[0].Weight[0].Unit)
 			@PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+" "+data.MtxReport.HeightLength[0].HeightLength[0].Unit)
-			@PatientMedicationRow("Ethnicity", data.MtxReport.EthnicIdentity[0].Ethnicity[0])
+			@PatientMedicationRow("Ethnicity", "White")
 		</div>
 	</div>
 }

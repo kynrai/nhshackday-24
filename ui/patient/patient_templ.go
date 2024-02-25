@@ -104,7 +104,7 @@ func PatientProfilePage(data model.SingleMtxReport) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Ethnicity", data.MtxReport.EthnicIdentity[0].Ethnicity[0]).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Ethnicity", "White").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
