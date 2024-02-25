@@ -16,6 +16,11 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
+func (s *Server) handlePageSSE(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	ui.Index(ui.SSE()).Render(r.Context(), w)
+}
+
 func (s *Server) handleNotify(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	addr := r.FormValue("addr")
