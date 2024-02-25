@@ -707,7 +707,7 @@ func PatientMedicationPage(results model.Prescription) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><button type=\"button\" class=\"flex w-full gap-2 justify-end mt-2 items-center\"><img class=\"aspect-square w-6\" src=\"/assets/img/arrow-right-circle.svg\"><span class=\"text-nhs-blue-1 font-medium underline underline-offset-4 hover:text-nhs-grey-3 text-right\">Patient's Guide to Methotrexate on the NHS Website.</span></button></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><button type=\"button\" class=\"flex w-full gap-2 justify-center mt-2 items-center\"><img class=\"aspect-square w-6\" src=\"/assets/img/arrow-right-circle.svg\"><span class=\"text-nhs-blue-1 font-medium underline underline-offset-4 hover:text-nhs-grey-3 text-right\">Patient's Guide to Methotrexate</span></button></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
