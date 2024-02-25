@@ -6,37 +6,3 @@ templ SSE() {
 		Contents of this box will be updated in real time with every SSE message received from the chatroom.
 	</div>
 }
-
-templ Connections(addrs []string) {
-	<div class="flex flex-col">
-		<p>Connections</p>
-		for _, addr := range addrs {
-			<form class="flex">
-				<input type="text" name="addr" value={ addr }/>
-				<label>
-					{ addr }
-					<button
-						hx-post="/notify"
-						hx-swap="none"
-					>Notify</button>
-				</label>
-			</form>
-		}
-	</div>
-}
-
-templ Message(msg string) {
-	<div class="flex flex-col" id="notifications" hx-swap-oob="beforeend">
-		<p>{ msg }</p>
-	</div>
-}
-
-templ Notifications() {
-	<p>Notifications</p>
-	<div
-		hx-ext="ws"
-		ws-connect="/ws"
-	>
-		<div class="flex flex-col" id="notifications"></div>
-	</div>
-}

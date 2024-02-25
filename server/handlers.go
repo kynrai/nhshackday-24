@@ -64,10 +64,6 @@ func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 	ui.Index(clinician.ClinicianView(tabType, *data)).Render(r.Context(), w)
 }
 
-func (s *Server) handlePageIndex(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("HX-Redirect", "/clinician-view/prescription")
-}
-
 func (s *Server) handleNav(w http.ResponseWriter, r *http.Request) {
 	tabType := chi.URLParam(r, "type")
 	if tabType == "" {
