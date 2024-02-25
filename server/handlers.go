@@ -100,6 +100,7 @@ func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
 		buf := new(bytes.Buffer)
 		clinician.Ack().Render(r.Context(), buf)
 		s.notifyAckMsg <- fmt.Sprintf("event: ack\ndata: %s", buf.String())
+		w.Header().Set("HX-Push-Url", "false")
 	}
 	w.Header().Set("Content-Type", "text/html")
 	patient.PatientIndex(patient.PatientView(tabType, *data, labs)).Render(r.Context(), w)
