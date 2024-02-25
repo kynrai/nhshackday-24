@@ -60,8 +60,9 @@ func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	labs := s.reports
 	w.Header().Set("Content-Type", "text/html")
-	ui.Index(clinician.ClinicianView(tabType, *data)).Render(r.Context(), w)
+	ui.Index(clinician.ClinicianView(tabType, *data, labs)).Render(r.Context(), w)
 }
 
 func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
@@ -94,8 +95,9 @@ func (s *Server) handleNav(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	labs := s.reports
 	w.Header().Set("Content-Type", "text/html")
-	clinician.ClinicianView(tabType, *data).Render(r.Context(), w)
+	clinician.ClinicianView(tabType, *data, labs).Render(r.Context(), w)
 }
 
 func (s *Server) handleSMSReminder(w http.ResponseWriter, r *http.Request) {

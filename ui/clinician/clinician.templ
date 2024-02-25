@@ -3,9 +3,10 @@ package clinician
 import (
 	"github.com/kynrai/nhshackday-24/model"
 	"fmt"
+	"strings"
 )
 
-templ ClinicianView(tabType string, data model.Data) {
+templ ClinicianView(tabType string, data model.Data, labs []model.SingleMtxReport) {
 	<div id="clinician" class="flex h-screen">
 		<div class="w-[15%] h-screen border-r border-gray-400 pr-10">
 			<button
@@ -81,7 +82,7 @@ templ ClinicianView(tabType string, data model.Data) {
 				if tabType == "prescription" {
 					@PrescriptionTable(data.Composition.MtxReport.Prescription)
 				} else if tabType == "lab" {
-					@TestTable(data.Composition.MtxReport.LabResults)
+					@TestTable(data.Composition.MtxReport.LabResults, labs)
 				}
 			</div>
 		</div>
@@ -129,7 +130,7 @@ templ PrescriptionTable(results model.Prescription) {
 	</table>
 }
 
-templ TestTable(results model.LabResults) {
+templ TestTable(results model.LabResults, labs []model.SingleMtxReport) {
 	<div class="flex flex-col border-2 border-red-500 w-full mb-6 p-4 gap-2">
 		<div>
 			Patient's blood test results are not within the normal range. Send an alert to the patient to stop taking the medication immediately.
@@ -147,48 +148,109 @@ templ TestTable(results model.LabResults) {
 	<table class="table-fixed w-full mt-1 text-sm rounded-lg">
 		<thead>
 			<tr class="p-2 font-semibold bg-zinc-300 tracking-wide">
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Lab</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">Reference Range</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">1/2/24 - 8.00am</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">14/2/24 - 8.00am</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">28/2/24 - 8.00am</td>
-				<td class="p-2 border border-zinc-400 text-zinc-600 w-1/6">13/3/24 - 8.00am</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-[17%]">Lab</td>
+				<td class="p-2 border border-zinc-400 text-zinc-600 w-[10%]">Ref Range</td>
+				for _, lab := range labs {
+					<td class="p-2 border border-zinc-400 text-zinc-600">{ lab.MtxReport.Context[0].StartTime[0].Format("1/2/06") }</td>
+				}
 			</tr>
 		</thead>
 		<tbody>
 			@TestSection("Full Blood Count")
-			@TestRow("Hemoglobin", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Unit))
-			@TestRow("White blood cell", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Unit))
-			@TestRow("Lymphocyte", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Unit))
-			@TestRow("Neutrophils", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Unit))
-			@TestRow("Platelets", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude, results[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Unit))
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">Hemoglobin (g/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">White blood cell (10*9/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">Lymphocyte (10*9/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">Neutrophils (10*9/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">Platelet (10*9/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
 			@TestSection("Liver Function Test")
-			@TestRow("AST", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude, results[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Unit))
-			@TestRow("ALT", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude, results[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Unit))
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">AST (u/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">ALT (u/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
 			@TestSection("Urea & Electrolytes")
-			@TestRow("Creatinine", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude, results[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Unit))
-			@TestRow("Sodium", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude, results[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Unit))
-			@TestRow("Potassium", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude, results[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Unit))
-			@TestRow("Urea", results[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0], fmt.Sprintf("%v %v", results[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude, results[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Unit))
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">Creatinine (umol/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">Sodium (mmol/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">Potassium (mmol/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
+			<tr class="align-top">
+				<td class="p-2 font-medium border border-zinc-400">Urea (mmol/L)</td>
+				<td class="p-2 border border-zinc-400 w-1/6">{ labs[0].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0] }</td>
+				for i := 0; i <= 9; i++ {
+					<td class="p-2 border border-zinc-400 w-1/6">{ fmt.Sprint(labs[i].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude) } </td>
+				}
+			</tr>
 		</tbody>
 	</table>
+}
+
+func DateConverter(s string) string {
+	date := s[:10]
+	split := strings.Split(date, "-")
+	return fmt.Sprintf("%v/%v/%v", split[2], split[1], split[0])
 }
 
 templ TestSection(title string) {
 	<tr class="p-2 font-medium bg-zinc-200">
 		<td class="p-2 w-1/6 text-zinc-600 border border-zinc-400">{ title }</td>
-		for i := 0; i < 5; i++ {
+		for i := 0; i <=10; i++ {
 			<td class="p-2 border border-zinc-400 w-1/6"></td>
-		}
-	</tr>
-}
-
-templ TestRow(k, refRange, v string) {
-	<tr class="align-top">
-		<td class="p-2 font-medium border border-zinc-400">{ k }</td>
-		<td class="p-2 border border-zinc-400 w-1/6">{ refRange } </td>
-		for i := 0; i < 4; i++ {
-			<td class="p-2 border border-zinc-400 w-1/6">{ v } </td>
 		}
 	</tr>
 }
