@@ -97,12 +97,14 @@ templ PrescriptionTable(results model.Prescription) {
 		</div>
 		<div class="flex gap-4">
 			<button
+				_="on click set my.innerText to 'SMS Sent!'"
 				hx-get="/hx/sms-reminder"
 				hx-swap="none"
 				class="px-4 py-2 rounded-md w-fit bg-nhs-green-2 text-white border-b-2 border-b-white"
 				type="button"
 			>Send SMS</button>
 			<button
+				_="on click set my.innerText to 'Reminder Sent!'"
 				hx-post="/notify"
 				hx-swap="none"
 				class="px-4 py-2 rounded-md w-fit bg-nhs-green-2 text-white border-b-2 border-b-white"
@@ -138,17 +140,19 @@ templ PrescriptionTable(results model.Prescription) {
 
 templ TestTable(results model.LabResults, labs []model.SingleMtxReport) {
 	<div class="flex flex-col border border-b-4 border-red-500 w-full mb-6 p-4 gap-2">
-		<div>
-			Patient's blood test results are not within the normal range. Send an alert to the patient to stop taking the medication immediately.
+		<div class="text-red-500 text-lg font-medium">
+			Patient's blood test results are not within the normal range. Send an alert to the patient to stop taking the medication <span class="underline font-bold">immediately</span>.
 		</div>
 		<div class="flex gap-4">
 			<button
+				_="on click set my.innerText to 'SMS Sent!'"
 				hx-get="/hx/sms-alert"
 				hx-swap="none"
 				class="px-4 py-2 rounded-md w-fit bg-nhs-green-2 text-white border-b-2 border-b-white"
 				type="button"
 			>Send SMS</button>
 			<button
+				_="on click set my.innerText to 'Alert Sent!'"
 				hx-post="/notify"
 				hx-swap="none"
 				class="px-4 py-2 rounded-md w-fit bg-nhs-green-2 text-white border-b-2 border-b-white"
