@@ -37,7 +37,7 @@ func PatientView(tabType string, data model.Data, labs []model.SingleMtxReport) 
 			return templ_7745c5c3_Err
 		}
 		if tabType == "profile" {
-			templ_7745c5c3_Err = PatientProfilePage(data).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = PatientProfilePage(labs[9]).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -67,7 +67,7 @@ func PatientView(tabType string, data model.Data, labs []model.SingleMtxReport) 
 	})
 }
 
-func PatientProfilePage(data model.Data) templ.Component {
+func PatientProfilePage(data model.SingleMtxReport) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -80,23 +80,35 @@ func PatientProfilePage(data model.Data) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center\"><div class=\"text-white font-medium text-center text-2xl tracking-wider\">My Profile</div></div><div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2\"><svg class=\"w-40 h-40\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"></path></svg></div><div class=\"flex flex-col gap-2 w-full\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center\"><div class=\"text-white font-medium text-center text-2xl tracking-wider\">My Profile</div></div><div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2\"><svg class=\"w-40 h-40\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"#444\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"></path></svg></div><div class=\"flex flex-col gap-2 w-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Name", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Name", "Alan Smith").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Age", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Age", "33").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("DOB", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("DOB", "1/1/1999").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Gender", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Gender", "M").Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+data.MtxReport.BodyWeight[0].Weight[0].Unit).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+data.MtxReport.HeightLength[0].HeightLength[0].Unit).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = PatientMedicationRow("Ethnicity", data.MtxReport.EthnicIdentity[0].Ethnicity[0]).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -124,14 +136,14 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col p-8 items-center gap-6 overflow-y-auto pb-[100px]\"><div class=\"flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium\">Blood Test Results</div><div class=\"flex items-center justify-center w-40 h-40 rounded-full bg-red-400/80 p-2 border border-black\"><img src=\"/assets/img/blood.svg\"></div><table class=\"table-fixed w-full mt-1 text-sm rounded-lg\"><thead><tr class=\"p-2 font-semibold bg-zinc-300 tracking-wide\"><td class=\"p-2 border border-zinc-400 text-zinc-600\">Lab</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/3\">Ref Range</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-[20%]\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center\"><div class=\"text-white font-medium text-center text-2xl tracking-wider\">Blood Test Results</div></div><div class=\"flex flex-col p-8 items-center gap-6 overflow-y-auto pb-[100px]\"><div class=\"flex items-center justify-center w-40 h-40 p-8 rounded-full border-2 border-nhs-grey-1\"><img src=\"/assets/img/blood.svg\"></div><table class=\"table-fixed w-full mt-1 text-sm rounded-lg\"><thead><tr class=\"p-2 font-semibold bg-zinc-300 tracking-wide\"><td class=\"p-2 border border-zinc-400 text-zinc-600\">Lab</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-1/3\">Ref Range</td><td class=\"p-2 border border-zinc-400 text-zinc-600 w-[20%]\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(labs[9].MtxReport.Context[0].StartTime[0].Format("1/2/06"))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 56, Col: 126}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 59, Col: 126}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -154,7 +166,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 68, Col: 133}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 71, Col: 133}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -184,7 +196,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 69, Col: 351}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 72, Col: 351}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -197,7 +209,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 73, Col: 150}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 76, Col: 150}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {
@@ -227,7 +239,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 74, Col: 402}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 77, Col: 402}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -240,7 +252,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 78, Col: 142}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 81, Col: 142}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 		if templ_7745c5c3_Err != nil {
@@ -270,7 +282,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 79, Col: 378}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 82, Col: 378}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 		if templ_7745c5c3_Err != nil {
@@ -283,7 +295,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 83, Col: 142}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 86, Col: 142}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {
@@ -313,7 +325,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var16 string
 		templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 84, Col: 378}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 87, Col: 378}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 		if templ_7745c5c3_Err != nil {
@@ -326,7 +338,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 88, Col: 140}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 91, Col: 140}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 		if templ_7745c5c3_Err != nil {
@@ -356,7 +368,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var19 string
 		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 89, Col: 372}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 92, Col: 372}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 		if templ_7745c5c3_Err != nil {
@@ -379,7 +391,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 99, Col: 138}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 102, Col: 138}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 		if templ_7745c5c3_Err != nil {
@@ -409,7 +421,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var22 string
 		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 100, Col: 366}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 103, Col: 366}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 		if templ_7745c5c3_Err != nil {
@@ -422,7 +434,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var23 string
 		templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 104, Col: 138}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 107, Col: 138}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var23))
 		if templ_7745c5c3_Err != nil {
@@ -452,7 +464,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var25 string
 		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 105, Col: 366}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 108, Col: 366}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 		if templ_7745c5c3_Err != nil {
@@ -475,7 +487,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var26 string
 		templ_7745c5c3_Var26, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 115, Col: 146}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 118, Col: 146}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var26))
 		if templ_7745c5c3_Err != nil {
@@ -505,7 +517,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var28 string
 		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 116, Col: 390}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 119, Col: 390}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 		if templ_7745c5c3_Err != nil {
@@ -518,7 +530,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var29 string
 		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 120, Col: 142}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 123, Col: 142}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 		if templ_7745c5c3_Err != nil {
@@ -548,7 +560,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var31 string
 		templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 121, Col: 378}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 124, Col: 378}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
 		if templ_7745c5c3_Err != nil {
@@ -561,7 +573,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var32 string
 		templ_7745c5c3_Var32, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 125, Col: 145}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 128, Col: 145}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var32))
 		if templ_7745c5c3_Err != nil {
@@ -591,7 +603,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var34 string
 		templ_7745c5c3_Var34, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 126, Col: 387}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 129, Col: 387}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var34))
 		if templ_7745c5c3_Err != nil {
@@ -604,7 +616,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var35 string
 		templ_7745c5c3_Var35, templ_7745c5c3_Err = templ.JoinStringErrs(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0])
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 130, Col: 140}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 133, Col: 140}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var35))
 		if templ_7745c5c3_Err != nil {
@@ -634,7 +646,7 @@ func PatientLabPage(data model.Data, labs []model.SingleMtxReport) templ.Compone
 		var templ_7745c5c3_Var37 string
 		templ_7745c5c3_Var37, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 131, Col: 372}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 134, Col: 372}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var37))
 		if templ_7745c5c3_Err != nil {
@@ -733,7 +745,7 @@ func PatientMedicationRow(k, v string) templ.Component {
 		var templ_7745c5c3_Var40 string
 		templ_7745c5c3_Var40, templ_7745c5c3_Err = templ.JoinStringErrs(k)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 183, Col: 6}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 186, Col: 6}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var40))
 		if templ_7745c5c3_Err != nil {
@@ -746,7 +758,7 @@ func PatientMedicationRow(k, v string) templ.Component {
 		var templ_7745c5c3_Var41 string
 		templ_7745c5c3_Var41, templ_7745c5c3_Err = templ.JoinStringErrs(v)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 186, Col: 6}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 189, Col: 6}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var41))
 		if templ_7745c5c3_Err != nil {

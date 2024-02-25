@@ -1,9 +1,15 @@
-<svg width="100" height="100" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="80" height="80" fill="url(#pattern0)"/>
-<defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0_87_1952" transform="scale(0.0111111)"/>
-</pattern>
-<image id="image0_87_1952" width="90" height="90" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD0UlEQVR4nO2dyWsUQRyF32T9B9R4EcWMKKIonlyDeBYxomDcQHHDuFy9JBHEiHrJSZFocLsJKnjwICMeFEVQgogSF8SoaNS4HEzUBH/SWH0ZMpme6ZquV9X1wSMwDJ2qj6K7tq4BPB6Px2nqAHQB+KrSpT7zaOYMAMlLt7esl7VjSA7T4mXrYYq6VRQS/Q3ANC87HjUA7o4jOcwd9V1PmRyOIDlMR7n/JO3MB/CnBNEjABaYLrRt1AB4WILkML0Aak0X3ibaypAc5qDpwtvCLADDMUT/AjDbdCXYqVI9CImZewCqTVeGmf0aJIdpNV0ZVhrU4EOX6B8AJpuuFCMXNEoOc9Z0pdhYAuBvBUQH11xkunIsVKv+r1Qoj/yD8T8HKig5zB6knAbND8BCCWb/JiLFdCcgOcwppHgEOJKg6NG0jhivJyg5zBWkjGUGJIdZipSQibhqUqncV2VwnnUGJYdphuPUAnhOILrP9QWC3QSSw+yEo9QCeE0gOMwbV1v1NgK5+dkCByeO+gjE5ueZWtVxhhYCqYUS9IKcIAPgMYHQQul1pV+9mkBmsayEAzwgEBlltGg1KwgkSsQ0wWKuEQiUiLkMS5mq5oDFkoyqMlvHCQJ5UmKOwDKCl3g+EYiTEvPRtmH5GgJpUmZWwSJMLFOJplyFRVsIklx0Fc0J3jKYBAtoJZAlMRPMm9Nzi0CUxMxNkDPB8tuGqIyoutCylUCSpGFR4BKBINGU8yDmHYEg0ZT3IN5LJ45lJgjZTCBGNGcDCDlOIEY05ygIuUEgRjQnmEqg4ymBGNGcJyDkA4EYSUPPI87720KaoE50/CYQI5oTvMBPxyCBGNGczyCEaaeoaMorEHKbQIxoTg6EnCYQI5pzEo6ftSEk2QtC5hGIEQA/1ZlMjWrbQ/C3HcBQGdeaC0Kq1FPatOSFBcq3qETZA8zbeXsMi24rUr6OEq5FfcDscsOiG4uUL+vK7tIq1fc0JbquSPnqI17nBfNtI2QXcYueEfE6O2AB9QbXDtuLlO1QhGv023TS+iZDoofGOaxqccReh1UHf2cMDsmHVO8iq1pmVrXkYVuH3MXIqkP+xJJ8BzAdlsJwZIREjFW3jLE4RiCxWDrhABl1dKWQ5qINfeZSTjg/RyA1Pz0u/ghDhuw20ulSSx6L5oRObyyUoCe0Hikha+jNgJzNXbhyyQDYCOBtAoL7Xei+xaVOTeK8rIDgYBZuu01zF0m18Cb1K28DMeQOqEn7JtcfdjrIqPW6feqU3JxqnYNqR1SQL+qznPpOsJA6x8v1eDwej8eDVPMPTRNWTDu9WTIAAAAASUVORK5CYII="/>
-</defs>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg fill="#444" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 width="800px" height="800px" viewBox="0 0 371.409 371.409"
+	 xml:space="preserve">
+<g>
+	<path d="M270.265,149.448c-36.107-47.124-70.38-78.948-73.439-141.372c0-1.836-0.612-3.06-1.836-4.284
+		c-0.612-3.06-3.672-4.896-6.732-3.06c-3.672,0-6.731,2.448-6.731,6.732c-77.112,83.232-207.468,294.372-43.452,354.959
+		c74.052,27.541,157.896-9.791,172.584-90.576C318.614,228.396,295.969,182.497,270.265,149.448z M138.686,323.256
+		c-17.748-10.404-28.764-31.211-34.272-49.572c-2.448-9.18-3.672-18.359-3.06-27.539c3.672-15.912,8.568-31.213,14.076-46.512
+		c3.06,13.463,9.18,26.928,17.748,36.719c19.584,21.422,59.364,34.273,70.38,61.201c6.732,16.523-19.584,30.6-30.6,34.271
+		C161.33,335.496,148.477,329.377,138.686,323.256z"/>
+</g>
 </svg>

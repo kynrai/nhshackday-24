@@ -12,7 +12,7 @@ import (
 templ PatientView(tabType string, data model.Data, labs []model.SingleMtxReport) {
 	<div id="patient" class="h-screen">
 		if tabType == "profile" {
-			@PatientProfilePage(data)
+			@PatientProfilePage(labs[9])
 		} else if tabType == "records" {
 			@PatientMedicationPage(data.Composition.MtxReport.Prescription)
 		} else {
@@ -22,31 +22,34 @@ templ PatientView(tabType string, data model.Data, labs []model.SingleMtxReport)
 	</div>
 }
 
-templ PatientProfilePage(data model.Data) {
+templ PatientProfilePage(data model.SingleMtxReport) {
 	<div class="w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center">
 		<div class="text-white font-medium text-center text-2xl tracking-wider">My Profile</div>
 	</div>
 	<div class="flex flex-col p-8 h-full items-center gap-6">
 		<div class="flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2">
-			<svg class="w-40 h-40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+			<svg class="w-40 h-40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#444">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
 			</svg>
 		</div>
 		<div class="flex flex-col gap-2 w-full">
-			@PatientMedicationRow("Name", "123 mg")
-			@PatientMedicationRow("Age", "123 mg")
-			@PatientMedicationRow("DOB", "123 mg")
-			@PatientMedicationRow("Gender", "123 mg")
+			@PatientMedicationRow("Name", "Alan Smith")
+			@PatientMedicationRow("Age", "33")
+			@PatientMedicationRow("DOB", "1/1/1999")
+			@PatientMedicationRow("Gender", "M")
+			@PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+data.MtxReport.BodyWeight[0].Weight[0].Unit)
+			@PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+data.MtxReport.HeightLength[0].HeightLength[0].Unit)
+			@PatientMedicationRow("Ethnicity", data.MtxReport.EthnicIdentity[0].Ethnicity[0])
 		</div>
 	</div>
 }
 
 templ PatientLabPage(data model.Data, labs []model.SingleMtxReport) {
+	<div class="w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center">
+		<div class="text-white font-medium text-center text-2xl tracking-wider">Blood Test Results</div>
+	</div>
 	<div class="flex flex-col p-8 items-center gap-6 overflow-y-auto pb-[100px]">
-		<div class="flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium">
-			Blood Test Results
-		</div>
-		<div class="flex items-center justify-center w-40 h-40 rounded-full bg-red-400/80 p-2 border border-black">
+		<div class="flex items-center justify-center w-40 h-40 p-8 rounded-full border-2 border-nhs-grey-1">
 			<img src="/assets/img/blood.svg"/>
 		</div>
 		<table class="table-fixed w-full mt-1 text-sm rounded-lg">
