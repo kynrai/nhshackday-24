@@ -35,7 +35,6 @@ templ PatientProfilePage(data model.SingleMtxReport) {
 		<div class="flex flex-col gap-2 w-full">
 			@PatientMedicationRow("Name", "Alan Smith")
 			@PatientMedicationRow("Age", "33")
-			@PatientMedicationRow("DOB", "1/1/1999")
 			@PatientMedicationRow("Gender", "M")
 			@PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+data.MtxReport.BodyWeight[0].Weight[0].Unit)
 			@PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+data.MtxReport.HeightLength[0].HeightLength[0].Unit)
