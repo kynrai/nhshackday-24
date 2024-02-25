@@ -11,20 +11,22 @@ import (
 )
 
 type Server struct {
-	r       *chi.Mux
-	tw      *Twilio
-	ian     *IanClient
-	msgChan chan string
-	reports []model.SingleMtxReport
+	r              *chi.Mux
+	tw             *Twilio
+	ian            *IanClient
+	alertMsg       chan string
+	appointmentMsg chan string
+	reports        []model.SingleMtxReport
 }
 
 func NewServer(conf Config) (*Server, error) {
 	return &Server{
-		r:       chi.NewRouter(),
-		tw:      NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom, conf.TwilioTo),
-		ian:     NewIanClient(),
-		msgChan: make(chan string),
-		reports: model.MtxReports(),
+		r:              chi.NewRouter(),
+		tw:             NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom, conf.TwilioTo),
+		ian:            NewIanClient(),
+		alertMsg:       make(chan string),
+		appointmentMsg: make(chan string),
+		reports:        model.MtxReports(),
 	}, nil
 }
 

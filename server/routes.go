@@ -22,10 +22,6 @@ func (s *Server) Routes() {
 	s.r.Post("/", s.handleSubmit)
 	s.r.Get("/sms", s.handleSendSMS)
 	s.r.Get("/dummy", s.handleDummy)
-	s.r.Post("/notify", s.handleNotify)
-	s.r.Get("/sse", s.handlePageSSE)
-	s.r.Get("/ssesend", s.handlePageSSESend)
-	s.r.HandleFunc("/events", s.handleSSEConnect)
 	s.r.Get("/clinician", s.handleClinicianView)
 	s.r.Get("/patient", s.handlePatientView)
 	s.r.Route("/hx", func(r chi.Router) {
@@ -33,5 +29,9 @@ func (s *Server) Routes() {
 		r.Get("/sms-reminder", s.handleSMSReminder)
 		r.Get("/sms-alert", s.handleSMSAlert)
 	})
-	s.r.Get("/alert", s.handleAlert)
+
+	s.r.HandleFunc("/alertevents", s.handleAlertConnect)
+	s.r.Post("/app-alert", s.handleSendAlert)
+	s.r.HandleFunc("/appointmentevents", s.handleAppointmentConnect)
+	s.r.Post("/app-reminder", s.handleSendAppointment)
 }

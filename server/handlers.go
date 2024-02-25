@@ -123,7 +123,3 @@ func (s *Server) handleSMSAlert(w http.ResponseWriter, r *http.Request) {
 	enc.SetIndent("", "  ")
 	enc.Encode(resp)
 }
-
-func (s *Server) handleAlert(w http.ResponseWriter, r *http.Request) {
-	patient.Alert().Render(r.Context(), w)
-}
