@@ -546,6 +546,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.fixed{
+  position: fixed;
+}
+
 .absolute{
   position: absolute;
 }
@@ -554,12 +558,12 @@ video {
   position: relative;
 }
 
-.sticky{
-  position: sticky;
-}
-
 .bottom-0{
   bottom: 0px;
+}
+
+.bottom-10{
+  bottom: 2.5rem;
 }
 
 .left-0{
@@ -568,10 +572,6 @@ video {
 
 .left-\[13px\]{
   left: 13px;
-}
-
-.top-0{
-  top: 0px;
 }
 
 .top-\[-16px\]{
@@ -732,6 +732,10 @@ video {
 
 .flex-auto{
   flex: 1 1 auto;
+}
+
+.grow{
+  flex-grow: 1;
 }
 
 .table-fixed{

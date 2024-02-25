@@ -23,7 +23,7 @@ func Header() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<header class=\"sticky top-0 flex items-center justify-between bg-nhs-blue-1 px-10 py-4 h-16 text-white\"><a href=\"/\"><h1 class=\"text-2xl font-semibold tracking-wide\">Clinician Dashboard</h1></a></header>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<header class=\"flex items-center justify-between bg-nhs-blue-1 px-10 py-4 h-16 text-white\"><a href=\"/\"><h1 class=\"text-2xl font-semibold tracking-wide\">Clinician Dashboard</h1></a></header>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
