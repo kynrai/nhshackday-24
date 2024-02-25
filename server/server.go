@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/kynrai/nhshackday-24/model"
 )
 
 type Server struct {
@@ -14,6 +15,7 @@ type Server struct {
 	tw      *Twilio
 	ian     *IanClient
 	msgChan chan string
+	reports []model.SingleMtxReport
 }
 
 func NewServer(conf Config) (*Server, error) {
@@ -22,6 +24,7 @@ func NewServer(conf Config) (*Server, error) {
 		tw:      NewTwilio(conf.TwilioSID, conf.TwilioAuth, conf.TwilioFrom, conf.TwilioTo),
 		ian:     NewIanClient(),
 		msgChan: make(chan string),
+		reports: model.MtxReports(),
 	}, nil
 }
 
