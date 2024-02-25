@@ -43,7 +43,7 @@ func ClinicianView(tabType string, data model.Data, labs []model.SingleMtxReport
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString("/hx/nav/" + "prescription"))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString("/hx/clinician-nav/" + "prescription"))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -68,7 +68,7 @@ func ClinicianView(tabType string, data model.Data, labs []model.SingleMtxReport
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString("/hx/nav/" + "lab"))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString("/hx/clinician-nav/" + "lab"))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -93,7 +93,7 @@ func ClinicianView(tabType string, data model.Data, labs []model.SingleMtxReport
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString("/hx/nav/" + "appointment"))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString("/hx/clinician-nav/" + "appointment"))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

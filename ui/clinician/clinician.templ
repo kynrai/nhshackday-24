@@ -54,7 +54,7 @@ templ ClinicianView(tabType string, data model.Data, labs []model.SingleMtxRepor
 			<nav class="h-10 w-full border-b border-gray-400">
 				<ul class="ml-10 h-10 flex text-gray-500 cursor-pointer">
 					<li
-						hx-get={ "/hx/nav/" + "prescription" }
+						hx-get={ "/hx/clinician-nav/" + "prescription" }
 						hx-target="#clinician"
 						hx-swap="morph:outerHTML"
 						class={ "px-4 py-2 border border-gray-400 bg-gray-200 rounded-tl", templ.KV("border-b-white bg-white",tabType=="prescription"), templ.KV("hover:bg-blue-100",tabType!="prescription") }
@@ -62,7 +62,7 @@ templ ClinicianView(tabType string, data model.Data, labs []model.SingleMtxRepor
 						Prescriptions
 					</li>
 					<li
-						hx-get={ "/hx/nav/" + "lab" }
+						hx-get={ "/hx/clinician-nav/" + "lab" }
 						hx-target="#clinician"
 						hx-swap="morph:outerHTML"
 						class={ "px-4 py-2 border-y border-gray-400 bg-gray-200",templ.KV("border-b-white bg-white",tabType=="lab"),templ.KV("hover:bg-blue-100",tabType!="lab") }
@@ -70,7 +70,7 @@ templ ClinicianView(tabType string, data model.Data, labs []model.SingleMtxRepor
 						Lab Results
 					</li>
 					<li
-						hx-get={ "/hx/nav/" + "appointment" }
+						hx-get={ "/hx/clinician-nav/" + "appointment" }
 						hx-target="#clinician"
 						hx-swap="morph:outerHTML"
 						class={ "px-4 py-2 border border-gray-400 bg-gray-200 rounded-tr",templ.KV("border-b-white bg-white",tabType=="appointment"),templ.KV("hover:bg-blue-100",tabType!="appointment") }

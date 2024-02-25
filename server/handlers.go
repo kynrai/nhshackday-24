@@ -65,26 +65,7 @@ func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 	ui.Index(clinician.ClinicianView(tabType, *data, labs)).Render(r.Context(), w)
 }
 
-func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
-	tabType := chi.URLParam(r, "type")
-	if tabType == "" {
-		tabType = "medication"
-	}
-	data, err := s.ian.Read()
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "text/html")
-	patient.PatientIndex(patient.PatientView(tabType, *data)).Render(r.Context(), w)
-}
-
-func (s *Server) handlePageIndex(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("HX-Redirect", "/clinician-view/prescription")
-}
-
-func (s *Server) handleNav(w http.ResponseWriter, r *http.Request) {
+func (s *Server) handleClinicianNav(w http.ResponseWriter, r *http.Request) {
 	tabType := chi.URLParam(r, "type")
 	if tabType == "" {
 		tabType = "prescription"
@@ -98,6 +79,36 @@ func (s *Server) handleNav(w http.ResponseWriter, r *http.Request) {
 	labs := s.reports
 	w.Header().Set("Content-Type", "text/html")
 	clinician.ClinicianView(tabType, *data, labs).Render(r.Context(), w)
+}
+
+func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
+	tabType := chi.URLParam(r, "type")
+	if tabType == "" {
+		tabType = "profile"
+	}
+	data, err := s.ian.Read()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html")
+	patient.PatientIndex(patient.PatientView(tabType, *data)).Render(r.Context(), w)
+}
+
+func (s *Server) handlePatientNav(w http.ResponseWriter, r *http.Request) {
+	tabType := chi.URLParam(r, "type")
+	if tabType == "" {
+		tabType = "profile"
+	}
+	data, err := s.ian.Read()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html")
+	patient.PatientView(tabType, *data).Render(r.Context(), w)
 }
 
 func (s *Server) handleSMSReminder(w http.ResponseWriter, r *http.Request) {
