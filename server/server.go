@@ -2,7 +2,9 @@ package server
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -26,5 +28,8 @@ func NewServer(conf Config) (*Server, error) {
 func (s *Server) Start() {
 	s.Routes()
 	fmt.Println("Server started on http://localhost:8080")
-	http.ListenAndServe(":8080", s.r)
+	if os.Getenv("PORT") == "" {
+		os.Setenv("PORT", "8080")
+	}
+	log.Println(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), s.r))
 }
