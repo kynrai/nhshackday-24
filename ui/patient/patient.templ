@@ -2,47 +2,159 @@ package patient
 
 import (
 	"strings"
+	"fmt"
+	"strconv"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 	"github.com/kynrai/nhshackday-24/model"
 )
 
-templ PatientView(tabType string, data model.Data) {
-	<div id="patient" class="flex flex-col h-screen">
+templ PatientView(tabType string, data model.Data, labs []model.SingleMtxReport) {
+	<div id="patient" class="h-screen">
 		if tabType == "profile" {
-			@PatienProfilePage(data)
-		} else {
+			@PatientProfilePage(labs[9])
+		} else if tabType == "records" {
 			@PatientMedicationPage(data.Composition.MtxReport.Prescription)
+		} else {
+			@PatientLabPage(data, labs)
 		}
 		@PatientNav(tabType)
 	</div>
 }
 
-templ PatienProfilePage(data model.Data) {
-	<div class="w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center">
-		<div class="text-white font-medium text-center">My Profile</div>
+templ PatientProfilePage(data model.SingleMtxReport) {
+	<div class="w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center">
+		<div class="text-white font-medium text-center text-2xl tracking-wider">My Profile</div>
 	</div>
 	<div class="flex flex-col p-8 h-full items-center gap-6">
 		<div class="flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2">
-			<svg class="w-40 h-40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+			<svg class="w-40 h-40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#444">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
 			</svg>
 		</div>
 		<div class="flex flex-col gap-2 w-full">
-			@PatientMedicationRow("Name", "123 mg")
-			@PatientMedicationRow("Age", "123 mg")
-			@PatientMedicationRow("DOB", "123 mg")
-			@PatientMedicationRow("Gender", "123 mg")
+			@PatientMedicationRow("Name", "Alan Smith")
+			@PatientMedicationRow("Age", "33")
+			@PatientMedicationRow("Gender", "M")
+			@PatientMedicationRow("Weight", fmt.Sprint(data.MtxReport.BodyWeight[0].Weight[0].Magnitude)+data.MtxReport.BodyWeight[0].Weight[0].Unit)
+			@PatientMedicationRow("Height", fmt.Sprint(data.MtxReport.HeightLength[0].HeightLength[0].Magnitude)+data.MtxReport.HeightLength[0].HeightLength[0].Unit)
+			@PatientMedicationRow("Ethnicity", data.MtxReport.EthnicIdentity[0].Ethnicity[0])
 		</div>
 	</div>
 }
 
+templ PatientLabPage(data model.Data, labs []model.SingleMtxReport) {
+	<div class="w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center">
+		<div class="text-white font-medium text-center text-2xl tracking-wider">Blood Test Results</div>
+	</div>
+	<div class="flex flex-col p-8 items-center gap-6 overflow-y-auto pb-[100px]">
+		<div class="flex items-center justify-center w-40 h-40 p-8 rounded-full border-2 border-nhs-grey-1">
+			<img src="/assets/img/blood.svg"/>
+		</div>
+		<table class="table-fixed w-full mt-1 text-sm rounded-lg">
+			<thead>
+				<tr class="p-2 font-semibold bg-zinc-300 tracking-wide">
+					<td class="p-2 border border-zinc-400 text-zinc-600">Lab</td>
+					<td class="p-2 border border-zinc-400 text-zinc-600 w-1/3">Ref Range</td>
+					<td class="p-2 border border-zinc-400 text-zinc-600 w-[20%]">{ labs[9].MtxReport.Context[0].StartTime[0].Format("1/2/06") }</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="p-2 font-medium bg-zinc-200">
+					<td class="p-2 w-1/6 text-zinc-600 border border-zinc-400">Full Blood Count</td>
+					for i := 0; i <2; i++ {
+						<td class="p-2 border border-zinc-400 w-1/6"></td>
+					}
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">Hemoglobin (g/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].Hb[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">White blood cell (10*9/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].TotalWhiteCellCount[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">Lymphocyte (10*9/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].Lymphocytes[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">Neutrophils (10*9/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].Neutrophils[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">Platelet (10*9/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].FullBloodCount[0].Platelets[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="p-2 font-medium bg-zinc-200">
+					<td class="p-2 w-1/6 text-zinc-600 border border-zinc-400">Liver Function Test</td>
+					for i := 0; i <2; i++ {
+						<td class="p-2 border border-zinc-400 w-1/6"></td>
+					}
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">AST (u/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].LiverFunctionTests[0].Ast[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">ALT (u/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].LiverFunctionTests[0].Alt[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="p-2 font-medium bg-zinc-200">
+					<td class="p-2 w-1/6 text-zinc-600 border border-zinc-400">Urea & Electrolytes</td>
+					for i := 0; i <2; i++ {
+						<td class="p-2 border border-zinc-400 w-1/6"></td>
+					}
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">Creatinine (umol/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Creatinine[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">Sodium (mmol/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Sodium[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">Potassium (mmol/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Potassium[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+				<tr class="align-top">
+					<td class="p-2 font-medium border border-zinc-400">Urea (mmol/L)</td>
+					<td class="p-2 border border-zinc-400 w-1/6">{ labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0] }</td>
+					<td class={ "p-2 border border-zinc-400 w-1/6", templ.KV("bg-red-200",IsAbnormal(labs[1].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].ReferenceRangeGuidance[0],labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude)) }>{ fmt.Sprint(labs[9].MtxReport.LabResults[0].UreaAndElectrolytes[0].Urea[0].AnalyteResult[0].Magnitude) } </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+}
+
+func IsAbnormal(s string, result float64) bool {
+	if s == "<41" {
+		return result > 41
+	} else {
+		refRange := strings.Split(s, " - ")
+		low, _ := strconv.ParseFloat(refRange[0], 64)
+		high, _ := strconv.ParseFloat(refRange[1], 64)
+		return result < low || result > high
+	}
+}
+
 templ PatientMedicationPage(results model.Prescription) {
-	<div class="w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center">
-		<div class="text-white font-medium text-center">My Medications</div>
+	<div class="w-full h-16 bg-nhs-blue-1 px-4 py-6 flex flex-col justify-center items-center">
+		<div class="text-white font-medium text-center text-2xl tracking-wider">My Medications</div>
 	</div>
 	<div class="flex flex-col p-8 h-full items-center gap-6">
-		<div class="w-40 h-40 rounded-full p-8 border-2 border-nhs-grey-1 mb-8">
+		<div class="w-40 h-40 rounded-full p-8 border-2 border-nhs-grey-1">
 			<img src="/assets/img/pill.svg"/>
 		</div>
 		<div class="flex items-center justify-center px-4 py-2 w-full tracking-wide font-medium text-xl border-b-nhs-grey-1 border-b">
@@ -56,8 +168,8 @@ templ PatientMedicationPage(results model.Prescription) {
 		</div>
 		<button
 			type="button"
-			class="flex w-full gap-2 justify-end mt-2 items-center"
-		><img class="aspect-square w-6" src="/assets/img/arrow-right-circle.svg"/><span class="text-nhs-blue-1 font-medium underline underline-offset-4 hover:text-nhs-grey-3 text-right">Patient's Guide to Methotrexate on the NHS Website.</span></button>
+			class="flex w-full gap-2 justify-center mt-2 items-center"
+		><img class="aspect-square w-6" src="/assets/img/arrow-right-circle.svg"/><span class="text-nhs-blue-1 font-medium underline underline-offset-4 hover:text-nhs-grey-3 text-right">Patient's Guide to Methotrexate</span></button>
 	</div>
 }
 
