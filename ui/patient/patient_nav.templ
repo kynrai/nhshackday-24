@@ -1,7 +1,7 @@
 package patient
 
 templ PatientNav(tabType string) {
-	<nav class="flex w-full bg-gray-200 h-14">
+	<nav class="flex w-full bg-gray-200 h-14 absolute bottom-0">
 		<div
 			hx-get={ "/hx/patient-nav/" + "profile" }
 			hx-target="#patient"

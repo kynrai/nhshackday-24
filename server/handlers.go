@@ -91,9 +91,10 @@ func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	labs := s.reports
 
 	w.Header().Set("Content-Type", "text/html")
-	patient.PatientIndex(patient.PatientView(tabType, *data)).Render(r.Context(), w)
+	patient.PatientIndex(patient.PatientView(tabType, *data, labs)).Render(r.Context(), w)
 }
 
 func (s *Server) handlePatientNav(w http.ResponseWriter, r *http.Request) {
@@ -106,9 +107,10 @@ func (s *Server) handlePatientNav(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	labs := s.reports
 
 	w.Header().Set("Content-Type", "text/html")
-	patient.PatientView(tabType, *data).Render(r.Context(), w)
+	patient.PatientView(tabType, *data, labs).Render(r.Context(), w)
 }
 
 func (s *Server) handleSMSReminder(w http.ResponseWriter, r *http.Request) {
