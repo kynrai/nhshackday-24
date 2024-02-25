@@ -22,11 +22,11 @@ templ PatientView(tabType string, data model.Data, labs []model.SingleMtxReport)
 	</div>
 }
 
-templ PatientProfilePage(data model.Data) {
-	<div class="flex flex-col p-8 items-center gap-6">
-		<div class="flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium">
-			My Profile
-		</div>
+templ PatienProfilePage(data model.Data) {
+	<div class="w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center">
+		<div class="text-white font-medium text-center">My Profile</div>
+	</div>
+	<div class="flex flex-col p-8 h-full items-center gap-6">
 		<div class="flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2">
 			<svg class="w-40 h-40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
@@ -148,22 +148,26 @@ func IsAbnormal(s string, result float64) bool {
 }
 
 templ PatientMedicationPage(results model.Prescription) {
-	<div class="flex flex-col p-8 items-center gap-6">
-		<div class="flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium">
-			My Medications
-		</div>
-		<div class="w-40 h-40 rounded-full bg-gray-300 p-8">
+	<div class="w-full h-20 bg-nhs-blue-1 p-4 flex flex-col justify-end items-center">
+		<div class="text-white font-medium text-center">My Medications</div>
+	</div>
+	<div class="flex flex-col p-8 h-full items-center gap-6">
+		<div class="w-40 h-40 rounded-full p-8 border-2 border-nhs-grey-1 mb-8">
 			<img src="/assets/img/pill.svg"/>
 		</div>
-		<div class="flex items-center justify-center px-4 py-1 rounded-full bg-gray-200 w-full tracking-wide font-medium">
+		<div class="flex items-center justify-center px-4 py-2 w-full tracking-wide font-medium text-xl border-b-nhs-grey-1 border-b">
 			Methotrexate
 		</div>
-		<div class="flex flex-col gap-2 w-full">
+		<div class="flex flex-col gap-2 w-full px-2">
 			@PatientMedicationRow("Dose", MedicationDirections(results[0].MedicationUseStatement[0].OverallDirectionsDescription[0])[0])
 			@PatientMedicationRow("Frequency", MedicationDirections(results[0].MedicationUseStatement[0].OverallDirectionsDescription[0])[1])
 			@PatientMedicationRow("Route", results[0].MedicationUseStatement[0].RouteOfAdministration[0])
 			@PatientMedicationRow("Prescribed for", results[0].MedicationUseStatement[0].ClinicalIndication[0].Terminology)
 		</div>
+		<button
+			type="button"
+			class="flex w-full gap-2 justify-end mt-2 items-center"
+		><img class="aspect-square w-6" src="/assets/img/arrow-right-circle.svg"/><span class="text-nhs-blue-1 font-medium underline underline-offset-4 hover:text-nhs-grey-3 text-right">Patient's Guide to Methotrexate on the NHS Website.</span></button>
 	</div>
 }
 
@@ -175,11 +179,11 @@ func MedicationDirections(s string) []string {
 }
 
 templ PatientMedicationRow(k,v string) {
-	<div class="flex justify-between items-center gap-1 text-sm">
+	<div class="flex justify-between items-center gap-1 text-sm border-b border-b-nhs-grey-1 py-2">
 		<div class="font-medium">
 			{ k }
 		</div>
-		<div class="flex justify-center px-4 py-1 rounded-full bg-gray-200 w-2/3 text-sm tracking-wider">
+		<div class="flex justify-center px-4 py-1 w-2/3 text-sm tracking-wider">
 			{ v }
 		</div>
 	</div>
