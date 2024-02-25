@@ -28,6 +28,7 @@ func (s *Server) Routes() {
 	s.r.Get("/cons", s.handlePageConnections)
 
 	s.r.Get("/clinician", s.handleClinicianView)
+	s.r.Get("/patient", s.handlePatientView)
 	s.r.Route("/hx", func(r chi.Router) {
 		r.Get("/nav/{type}", s.handleNav)
 		r.Get("/sms-reminder", s.handleSMSReminder)
