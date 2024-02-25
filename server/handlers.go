@@ -67,16 +67,20 @@ func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 
 func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
 
-	// data, err := s.ian.Read()
-	// tabType := "prescription"
+	tabType := chi.URLParam(r, "type")
+	if tabType == "" {
+		tabType = "medication"
+	}
 
-	// if err != nil {
-	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-	// 	return
-	// }
+	data, err := s.ian.Read()
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	w.Header().Set("Content-Type", "text/html")
-	patient.PatientIndex().Render(r.Context(), w)
+	patient.PatientIndex(patient.PatientView(tabType, *data)).Render(r.Context(), w)
 }
 
 func (s *Server) handlePageIndex(w http.ResponseWriter, r *http.Request) {

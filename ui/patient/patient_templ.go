@@ -10,7 +10,14 @@ import "context"
 import "io"
 import "bytes"
 
-func Patient(tabType string) templ.Component {
+import (
+	"github.com/kynrai/nhshackday-24/model"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
+	"strings"
+)
+
+func PatientView(tabType string, data model.Data) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -27,9 +34,16 @@ func Patient(tabType string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationPage().Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
+		if tabType == "profile" {
+			templ_7745c5c3_Err = PatienProfilePage(data).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else {
+			templ_7745c5c3_Err = PatientMedicationPage(data.Composition.MtxReport.Prescription).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
 		}
 		templ_7745c5c3_Err = PatientNav(tabType).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
@@ -46,7 +60,7 @@ func Patient(tabType string) templ.Component {
 	})
 }
 
-func PatienProfilePage() templ.Component {
+func PatienProfilePage(data model.Data) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -59,23 +73,23 @@ func PatienProfilePage() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium\">My Medications</div><div class=\"w-40 h-40 rounded-full bg-gray-300 p-8\"><img src=\"/assets/img/pill.svg\"></div><div class=\"flex items-center justify-center px-4 py-1 rounded-full bg-gray-200 w-full tracking-wide font-medium\">Methotrexate</div><div class=\"flex flex-col gap-2 w-full\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col p-8 h-full items-center gap-6\"><div class=\"flex items-center justify-center px-4 py-1 rounded-full bg-gray-300 w-full tracking-wide font-medium\">My Profile</div><div class=\"flex items-center justify-center w-40 h-40 rounded-full bg-gray-300 p-2\"><svg class=\"w-40 h-40\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"></path></svg></div><div class=\"flex flex-col gap-2 w-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Current dose", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Name", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Frequency", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Age", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Duration", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("DOB", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Indications", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Gender", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -90,7 +104,7 @@ func PatienProfilePage() templ.Component {
 	})
 }
 
-func PatientMedicationPage() templ.Component {
+func PatientMedicationPage(results model.Prescription) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -107,19 +121,19 @@ func PatientMedicationPage() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Current dose", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Dose", MedicationDirections(results[0].MedicationUseStatement[0].OverallDirectionsDescription[0])[0]).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Frequency", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Frequency", MedicationDirections(results[0].MedicationUseStatement[0].OverallDirectionsDescription[0])[1]).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Duration", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Route", results[0].MedicationUseStatement[0].RouteOfAdministration[0]).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = PatientMedicationRow("Indications", "123 mg").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = PatientMedicationRow("Prescribed for", results[0].MedicationUseStatement[0].ClinicalIndication[0].Terminology).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -132,6 +146,13 @@ func PatientMedicationPage() templ.Component {
 		}
 		return templ_7745c5c3_Err
 	})
+}
+
+func MedicationDirections(s string) []string {
+	description := strings.Split(s, " ")
+	caser := cases.Title(language.Und)
+	return []string{description[0], caser.String(description[1]) + " " + description[2]}
+
 }
 
 func PatientMedicationRow(k, v string) templ.Component {
@@ -147,14 +168,14 @@ func PatientMedicationRow(k, v string) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-between items-center gap-2 text-sm\"><div class=\"font-medium\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-between items-center gap-1 text-sm\"><div class=\"font-medium\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(k)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 52, Col: 6}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 69, Col: 6}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -167,7 +188,7 @@ func PatientMedicationRow(k, v string) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(v)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 55, Col: 6}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/patient/patient.templ`, Line: 72, Col: 6}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {

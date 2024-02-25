@@ -1,6 +1,6 @@
 package patient
 
-templ PatientIndex() {
+templ PatientIndex(page templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<meta charset="UTF-8"/>
@@ -13,7 +13,7 @@ templ PatientIndex() {
 		<script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>
 		<body hx-ext="morph" class="flex flex-col min-h-screen">
 			<main class="flex-1 overflow-auto h-screen">
-				@Patient()
+				@page
 			</main>
 		</body>
 	</html>
