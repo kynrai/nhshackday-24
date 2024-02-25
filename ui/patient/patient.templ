@@ -74,3 +74,21 @@ templ PatientMedicationRow(k,v string) {
 		</div>
 	</div>
 }
+
+templ Alert() {
+	<div class="bg-rose-300 w-screen h-screen">
+		<div class="flex flex-col h-screen justify-center items-center">
+			<img class="h-40 m-8" src="/assets/img/warning-sign.svg"/>
+			<p class="text-center font-bold text-4xl mb-2">ALERT</p>
+			<p class="text-center mb-4">Your recent blood test results have come back <span class="font-bold">abnormal</span></p>
+			<p class="text-center"><span class="font-bold">DO</span> <span class="font-bold underline text-red-600">NOT</span> take the next dose of Methotrexate.</p>
+			<p class="text-center mb-4">Contact your doctor of pharmacy immediately for further information</p>
+			<div>
+				<button class="flex items-center justify-center gap-1 bg-gray-100 rounded-2xl border-2 border-black px-4 py-2">
+					<img class="h-6" src="/assets/img/phone.svg"/>
+					<div class="text-2xl font-bold">Call GP</div>
+				</button>
+			</div>
+		</div>
+	</div>
+}

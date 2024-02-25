@@ -1,0 +1,20 @@
+{
+  "files.insertFinalNewline": true,
+  "editor.formatOnSave": true,
+  "gopls": {
+    "formatting.gofumpt": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[templ]": {
+    "editor.defaultFormatter": "a-h.templ"
+  },
+  "tailwindCSS.includeLanguages": {
+    "templ": "html"
+  },
+  "SQL-Formatter-VSCode.dialect": "sqlite"
+}

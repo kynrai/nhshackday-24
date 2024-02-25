@@ -24,6 +24,7 @@ func (s *Server) Routes() {
 	s.r.Get("/dummy", s.handleDummy)
 	s.r.Post("/notify", s.handleNotify)
 	s.r.Get("/sse", s.handlePageSSE)
+	s.r.Get("/ssesend", s.handlePageSSESend)
 	s.r.HandleFunc("/events", s.handleSSEConnect)
 	s.r.Get("/clinician", s.handleClinicianView)
 	s.r.Get("/patient", s.handlePatientView)
@@ -32,4 +33,5 @@ func (s *Server) Routes() {
 		r.Get("/sms-reminder", s.handleSMSReminder)
 		r.Get("/sms-alert", s.handleSMSAlert)
 	})
+	s.r.Get("/alert", s.handleAlert)
 }

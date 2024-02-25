@@ -2,9 +2,13 @@ package ui
 
 templ SSE() {
 	<h1>SSE Example with HTMX</h1>
-	<div hx-ext="sse" sse-connect="/events" sse-swap="message">
+	<div hx-ext="sse" sse-connect="/events" sse-swap="message" hx-swap="beforeend" class="flex flex-col">
 		Contents of this box will be updated in real time with every SSE message received from the chatroom.
 	</div>
+}
+
+templ SSESend() {
+	<h1>SSE Example with HTMX</h1>
 	<button
 		hx-post="/notify"
 		hx-swap="none"

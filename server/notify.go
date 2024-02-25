@@ -1,7 +1,6 @@
 package server
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"time"
@@ -14,31 +13,40 @@ func (s *Server) handlePageSSE(w http.ResponseWriter, r *http.Request) {
 	ui.Index(ui.SSE()).Render(r.Context(), w)
 }
 
+func (s *Server) handlePageSSESend(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html")
+	ui.Index(ui.SSESend()).Render(r.Context(), w)
+}
+
 func (s *Server) handleSSEConnect(w http.ResponseWriter, r *http.Request) {
 	// Set headers for SSE
 	w.Header().Set("Content-Type", "text/event-stream")
 	w.Header().Set("Cache-Control", "no-cache")
 	w.Header().Set("Connection", "keep-alive")
 
-	// Create a context for handling client disconnection
-	_, cancel := context.WithCancel(r.Context())
-	defer cancel()
+	s.msgChan = make(chan string)
 
 	// Send data to the client
 	go func() {
 		for data := range s.msgChan {
 			fmt.Fprintf(w, "data: %s\n\n", data)
-			w.(http.Flusher).Flush()
+			if f, ok := w.(http.Flusher); ok {
+				if f != nil {
+					f.Flush()
+				}
+			}
 		}
 	}()
+	<-r.Context().Done()
+	fmt.Println("Client disconnected")
 
 	// Simulate sending data periodically
-	for {
-		s.msgChan <- time.Now().Format(time.TimeOnly)
-		time.Sleep(1 * time.Second)
-	}
+	// for {
+	// 	s.msgChan <- time.Now().Format(time.TimeOnly)
+	// 	time.Sleep(1 * time.Second)
+	// }
 }
 
 func (s *Server) handleNotify(w http.ResponseWriter, r *http.Request) {
-	s.msgChan <- "Msg from server"
+	s.msgChan <- fmt.Sprintf("<div>%s: Msg from server</div>", time.Now().Format(time.TimeOnly))
 }

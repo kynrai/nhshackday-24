@@ -52,7 +52,6 @@ func (s *Server) handleDummy(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
-
 	data, err := s.ian.Read()
 	tabType := "prescription"
 
@@ -66,14 +65,11 @@ func (s *Server) handleClinicianView(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handlePatientView(w http.ResponseWriter, r *http.Request) {
-
 	tabType := chi.URLParam(r, "type")
 	if tabType == "" {
 		tabType = "medication"
 	}
-
 	data, err := s.ian.Read()
-
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -93,7 +89,6 @@ func (s *Server) handleNav(w http.ResponseWriter, r *http.Request) {
 		tabType = "prescription"
 	}
 	data, err := s.ian.Read()
-
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -125,4 +120,8 @@ func (s *Server) handleSMSAlert(w http.ResponseWriter, r *http.Request) {
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
 	enc.Encode(resp)
+}
+
+func (s *Server) handleAlert(w http.ResponseWriter, r *http.Request) {
+	ui.Index(patient.Alert()).Render(r.Context(), w)
 }
